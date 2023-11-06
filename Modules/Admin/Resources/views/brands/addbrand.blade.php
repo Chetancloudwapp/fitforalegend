@@ -34,7 +34,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('admin/brands/add')}}" id="main" method="post" enctype="multipart/form-data">
+                            <form id="main" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <input type="hidden" name="id" value="{{$brands['id']}}">

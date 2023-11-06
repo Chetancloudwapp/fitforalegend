@@ -54,9 +54,9 @@
                                             <td>{{ $value['status'] }}</td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
-                                                <a href="{{ url('admin/brands/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                <a href="{{ url('admin/color/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="brands/delete" record_id="{{ $value['id'] }}" class="confirmDelete" name="brands" title="Delete Brand Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a href="javascript:void(0)" record="color/delete" record_id="{{ encrypt($value['id']) }}" class="confirmDelete" name="color" title="Delete Color Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -90,7 +90,6 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                // window.location.href = "/admin/delete_"+record+"/"+record_id;
                 window.location.href = "/admin/"+record+"/"+record_id;
             }
             });

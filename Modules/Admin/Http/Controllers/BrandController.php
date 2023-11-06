@@ -7,20 +7,21 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\MasterBrand;
-// use Illuminate\Support\Facades\Crypt;
 use Validator;
 use DB;
-
 
 class BrandController extends Controller
 {
     use ValidatesRequests;
     public function index()
     {
-        $brands = MasterBrand::get();
-        return view('admin::brands.index')->with(compact('brands'));
+        $common = [];
+        $common['title'] = "Brands";
+        $brands = MasterBrand::where('status', 'Active')->whereNull('deleted_at')->get();
+        return view('admin::brands.index')->with(compact('common', 'brands'));
     }
 
+    /* --- ADD BRANDS --- */
     public function addbrands(Request $request, $id='')
     {
         
@@ -31,9 +32,8 @@ class BrandController extends Controller
             $message = "Brand Added Successfully!";
         }else{
             $title = "Edit Product";
-            // $id = base64_decode($id);
-            $brands = MasterBrand::find($request->id);
-            // dd($products);
+            $id = decrypt($id);
+            $brands = MasterBrand::find($id);
             $message = "Brand Updated Successfully!";
         }
         if($request->isMethod('post')){
@@ -83,62 +83,11 @@ class BrandController extends Controller
         return view('admin::brands.addbrand')->with(compact('title','brands'));
     }
 
-    // Delete Brands 
+    /* --- Delete Brands --- */
     public function deletebrands($id){
+        $id = decrypt($id);
         $brands = MasterBrand::findOrFail($id);
         $brands->delete();
         return redirect()->back()->with('success_message', 'Brand Deleted Successfully!');
-    }
-
-    public function create()
-    {
-        return view('admin::create');
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

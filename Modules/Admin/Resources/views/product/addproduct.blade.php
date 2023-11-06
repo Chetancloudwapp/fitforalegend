@@ -156,6 +156,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group mb-3 {{ $errors->has('product_dimension') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">Product Dimensions</label>
+                                            <input
+                                                class="form-control {{ $errors->has('product_dimension') ? 'form-control-danger' : '' }}"
+                                                name="product_dimension" type="text"
+                                                value="{{ old('product_dimension', $products['product_dimension']) }}" placeholder="Enter Product Dimension">      
+                                            @error('product_dimension')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('video_link') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Video Link</label>
                                             <input

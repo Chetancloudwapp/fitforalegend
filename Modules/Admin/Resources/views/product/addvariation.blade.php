@@ -34,10 +34,10 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('admin/variation/add')}}/{{$id}}" id="main" method="post" enctype="multipart/form-data">
+                            <form id="main" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <input type="hidden" name="id" value="{{$id}}">
+                                    <input type="hidden" name="id" value="{{$products['id']}}">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('name') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">{{('Name')}}<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>

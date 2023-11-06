@@ -79,12 +79,12 @@
                     </ul>
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') ? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>
+                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') || Request::is('admin/variation/add/{id}')? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>
                         <p>Product<i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item"> 
-                            <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/variation/add/{id}') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Product </p>
                             </a> 
                         </li>

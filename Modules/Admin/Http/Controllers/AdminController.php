@@ -36,11 +36,24 @@ class AdminController extends Controller
                 'password.required' => 'Password is required',
             ];
 
+            // $validation = Validator::make($request->all(),
+            // $rules,
+            // [
+            //     'required' => 'The :attribute field is required.',
+            // ],
+            // $customMessages
+            // );
+
+            // if ($validation->fails()) {
+            //     return back()->withErrors($validation)->withInput();
+            // }
+
             $this->validate($request, $rules , $customMessages);
 
             if(Auth::guard('admin')->attempt(['email'=>$data['email'], 'password'=> $data['password']])){
                 return redirect('admin/dashboard');
             }else{
+                // return back()->withErrors(['error' => "Invalid Username or Password!"]);
                 return redirect()->back()->with("error_message", "Invalid Email or Password");
             }
         }

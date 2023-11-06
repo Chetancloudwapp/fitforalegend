@@ -214,9 +214,7 @@ class CategoryController extends Controller
     }
 
     public function getSubcategories(Request $request) {
-        // dd($request->all());
         $categoryId = $request->input('category_id');
-        // dd($categoryId);
         $subcategories = Subcategory::where('cat_id', $categoryId)->pluck('name', 'id');
         return response()->json($subcategories);
     }

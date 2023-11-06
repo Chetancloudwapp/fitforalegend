@@ -18,6 +18,7 @@ class ColorController extends Controller
         return view('admin::color.index')->with(compact('color'));
     }
 
+    /* --- Add Colors--- */
     public function addcolors(Request $request, $id='')
     {
         
@@ -28,9 +29,8 @@ class ColorController extends Controller
             $message = "Color Added Successfully!";
         }else{
             $title = "Edit Color";
-            // $id = base64_decode($id);
-            $colors = MasterColor::find($request->id);
-            // dd($products);
+            $id = decrypt($id);
+            $colors = MasterColor::find($id);
             $message = "Color Updated Successfully!";
         }
         if($request->isMethod('post')){
@@ -71,63 +71,13 @@ class ColorController extends Controller
         return view('admin::color.addcolors')->with(compact('title','colors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    /* --- Delete Color --- */
+    public function deletecolor($id)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $id = decrypt($id);
+        $color = MasterColor::findOrFail($id);
+        $color->delete();
+        return redirect()->back()->with('success_message', 'Color Deleted Successfully!');    
     }
 }

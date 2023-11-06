@@ -53,8 +53,10 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/brands/delete/{id}', 'BrandController@deletebrands');
         
         // Color
-        Route::match(['get', 'post'], '/color', 'ColorController@index');
+        Route::match(['get','post'], '/color', 'ColorController@index');
         Route::match(['get','post'], '/color/add', 'ColorController@addcolors');
+        Route::match(['get','post'], '/color/edit/{id}', 'ColorController@addcolors');
+        Route::match(['get','post'], '/color/delete/{id}', 'ColorController@deletecolor');
     });
 });
 

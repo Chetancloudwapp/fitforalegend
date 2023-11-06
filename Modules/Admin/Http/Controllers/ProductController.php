@@ -19,12 +19,14 @@ class ProductController extends Controller
 {
     use ValidatesRequests;
 
-    // view product
+    /* --- VIEW PRODUCT --- */
+
     public function index()
     {
         $products = Product::get();
         return view('admin::product.index')->with(compact('products'));
     }
+
 
     /* --- Add Product--- */
     public function addProduct(Request $request, $id='')
@@ -33,32 +35,21 @@ class ProductController extends Controller
         $get_parent_category = Categories::where('status', 'Active')->get();
         $get_sub_category = Subcategory::where('status', 'Active')->get();
         $get_child_category = ChildCategory::where('status', 'Active')->get();
-        $get_brands = MasterBrand::where('status','Active')->get();
-        $get_colors = MasterColor::where('status','Active')->get();
+        $get_brands = MasterBrand::where('status','Active')->whereNull('deleted_at')->get();
+        $get_colors = MasterColor::where('status','Active')->whereNull('deleted_at')->get();
         if($id ==""){
             // Add Product
             $title = "Add Product";
             $products = new Product;
             $message = "Product Added Successfully!";
         }else{
-            // dd($request->id);
             $title = "Edit Product";
-
-            
             $id = decrypt($id);
-            // $id = base64_decode($id);
-
-
-            // return $id;
-            // dd($id);
             $products = Product::find($id);
-            // dd($products);            
-            // $products = Product::find($request->id);
             $message = "Product Updated Successfully!";
         }
         if($request->isMethod('post')){
             $data = $request->all();
-            // dd($data);
             $req_fields =  [];
             if($request->id !=''){
                 $req_fields['name']   = 'required';
@@ -89,11 +80,8 @@ class ProductController extends Controller
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();
             }
-            // dd($data);
-            // dd($products);
-            $products->name = $data['name'];
-            // return $data['name'];
-            
+           
+            $products->name = $data['name'];            
             $products->selling_price = $data['selling_price'];
             $products->cost_price = $data['cost_price'];
             $products->brand = $data['brand'];
@@ -101,6 +89,7 @@ class ProductController extends Controller
             $products->color = $data['color'];
             $products->quantity = $data['quantity'];
             $products->product_weight = $data['product_weight'];
+            $products->product_dimension = $data['product_dimension'];
             $products->video_link = $data['video_link'];
             $products->category = $data['parent_id'];
             $products->subcategory = $data['subcategory_id'];
@@ -132,7 +121,6 @@ class ProductController extends Controller
                 $products->gallery_images = $new_name;
             }
             $products->save();
-            // dd($products);
             return redirect('admin/product')->with('success_message', $message);
         }
         return view('admin::product.addproduct')->with(compact('title','products', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors'));
@@ -155,19 +143,23 @@ class ProductController extends Controller
         return response()->json($childcategories);
     }
 
+    /* --- DELETE PRODUCT --- */
     public function deleteProduct($id){
+        $id = decrypt($id);
         $products = Product::findOrFail($id);
         $products->delete();
         return redirect()->back()->with('success_message', 'Product Deleted Successfully');
     }
 
+
+    /* ---- ADD VARIATION PRODUCT ----- */
     public function addVariation(Request $request, $id)
     {
         $get_brands = MasterBrand::where('status','Active')->get();
        
-        $title = "Add to product Variation";
-        // $products =  Product::find($id);
-        // dd($products);
+        $title = "product Variation";
+        $id = decrypt($id);
+        $products =  new Product;
         $message = "Variation Added Successfully!";
         if($request->isMethod('post')){
             $data = $request->all();
@@ -238,66 +230,6 @@ class ProductController extends Controller
             $products->save();
             return redirect('admin/product')->with('success_message', $message);
         }
-        return view('admin::product.addvariation')->with(compact('title','id', 'get_brands'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return view('admin::product.addvariation')->with(compact('title', 'products', 'get_brands'));
     }
 }

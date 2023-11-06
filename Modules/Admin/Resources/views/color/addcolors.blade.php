@@ -34,7 +34,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('admin/color/add')}}" id="main" method="post" enctype="multipart/form-data">
+                            <form id="main" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <input type="hidden" name="id" value="{{$colors['id']}}">
@@ -55,7 +55,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('color') ? 'has-danger' : '' }}">
                                             <label for="colorPicker">Color</label>
-                                            <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="#ff0000">
+                                            @if($colors['id'] !='')
+                                               <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="{{ old('colorPicker', $colors['color_code'])}}">
+                                            @else
+                                                <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="#ff0000">
+                                            @endif
                                             @error('color')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}

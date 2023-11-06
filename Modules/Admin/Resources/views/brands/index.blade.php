@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Brands</h1>
+                    <h1>{{ $common['title'] }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Brands</li>
+                        <li class="breadcrumb-item active"><a href="{{ url('admin/brands')}}">{{ $common['title'] }}</a></li>
                     </ol>
                 </div>
             </div>
@@ -55,10 +55,9 @@
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['status'] }}</td>
                                             <td class="text-center">
-                                                {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
-                                                <a href="{{ url('admin/brands/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                <a href="{{ url('admin/brands/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="brands/delete" record_id="{{ $value['id'] }}" class="confirmDelete" name="brands" title="Delete Brand Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a href="javascript:void(0)" record="brands/delete" record_id="{{ encrypt($value['id']) }}" class="confirmDelete" name="brands" title="Delete Brand Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
