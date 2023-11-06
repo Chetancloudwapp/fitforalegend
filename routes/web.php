@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\front\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::get('/', function () {
 //         // Route::get('logout', [AdminController::class, 'logout']);
 //     });
 // });
+
+ Route::get('dashboard', [DashboardController::class, 'dashboard']);
+ Route::match(['get', 'post'], '/create_account', [DashboardController::class, 'create_account']);
