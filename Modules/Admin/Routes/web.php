@@ -57,12 +57,12 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/color/add', 'ColorController@addcolors');
         Route::match(['get','post'], '/color/edit/{id}', 'ColorController@addcolors');
         Route::match(['get','post'], '/color/delete/{id}', 'ColorController@deletecolor');
+        
+        // Vendors
+        Route::match(['get','post'], '/vendors', 'VendorController@index');
+        Route::match(['get','post'], '/vendors/add', 'VendorController@addVendors');
+        Route::match(['get','post'], '/vendors/edit/{id}', 'VendorController@addVendors');
+        Route::match(['get','post'], '/vendors/delete/{id}', 'VendorController@deletevendors');
     });
 });
-
-
-//  // test categories
-//  Route::get('categories', 'CategoryController@index');
-//  Route::match(['get','post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory');
-//  Route::get('delete_category/{id?}', 'CategoryController@destroy');
 

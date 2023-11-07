@@ -17,7 +17,7 @@
                         <p> Dashboard </p>
                     </a>
                 </li>
-                <li class="nav-item"> 
+                {{-- <li class="nav-item"> 
                     <a href="#" class="nav-link"> <i class="nav-icon fas fa-copy"></i>
                         <p> Users <i class="fas fa-angle-left right"></i> </p>
                     </a>
@@ -33,7 +33,7 @@
                             </a> 
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item menu-is-opening menu-open"> 
                     <a href="#" class="nav-link"> <i class="fa-solid fa-gear"></i>
                         <p> Settings <i class="fas fa-angle-left right"></i> </p>
@@ -57,7 +57,7 @@
                     </ul>
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('admin/category')}}" class="nav-link {{ Request::is('admin/category') || Request::is('admin/subcategory') ||  Request::is('admin/childcategory') ? 'active' : '' }}"><i class="fa-solid fa-layer-group"></i>
+                    <a href="{{ url('admin/category')}}" class="nav-link {{ Request::is('admin/category') || Request::is('admin/subcategory') ||  Request::is('admin/childcategory') ? 'active' : '' }}"><i class="fa-solid fa-layer-group"></i>&nbsp;&nbsp;
                         <p>Category<i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -79,7 +79,7 @@
                     </ul>
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') || Request::is('admin/variation/add/{id}')? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>
+                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') || Request::is('admin/variation/add/{id}')? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;&nbsp;
                         <p>Product<i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -99,6 +99,11 @@
                             </a> 
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item"> 
+                    <a href="{{ url('admin/vendors')}}" class="nav-link {{ Request::is('admin/vendors') ? 'active' : ''}}"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+                        <p>Vendors </p>
+                    </a> 
                 </li>
                 <li class="nav-item"> 
                     <a href="{{ url('admin/logout')}}" class="nav-link"> <i class="nav-icon fas fa-th"></i>

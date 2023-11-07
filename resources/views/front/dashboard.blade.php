@@ -4,7 +4,7 @@
     <div class="holder breadcrumbs-wrap mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="{{ route('web.home') }}">Home</a></li>
                 <li><span>My account</span></li>
             </ul>
         </div>
