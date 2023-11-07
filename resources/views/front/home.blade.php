@@ -64,31 +64,6 @@
             </div>
         </div>
     </div>
-    <!--<div class="holder holder-mt-xsmall">-->
-    <!--<div class="container">-->
-    <!--<div class="row vert-margin-small">-->
-    <!--  <div class="col-sm"> <a href="category.html" class="collection-grid-3-item image-hover-scale">-->
-    <!--          <div class="collection-grid-3-item-img image-container" style="padding-bottom: 93.68%"> <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/banner-fashion-2-02.webp" class="lazyload fade-up" alt="Banner">-->
-    <!--              <div class="foxic-loader"></div>-->
-    <!--          </div>-->
-    <!--          <div class="collection-grid-3-caption-bg">-->
-    <!--              <h3 class="collection-grid-3-title">Accessories</h3>-->
-    <!--              <h4 class="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>-->
-    <!--          </div>-->
-    <!--      </a> -->
-    <!--  </div>-->
-    <!--  <div class="col-sm"> <a href="category.html" class="collection-grid-3-item image-hover-scale">-->
-    <!--          <div class="collection-grid-3-item-img image-container" style="padding-bottom: 93.68%"> <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/banner-fashion-2-04.webp" class="lazyload fade-up" alt="Banner">-->
-    <!--              <div class="foxic-loader"></div>-->
-    <!--          </div>-->
-    <!--          <div class="collection-grid-3-caption-bg">-->
-    <!--              <h3 class="collection-grid-3-title">Fashion</h3>-->
-    <!--              <h4 class="collection-grid-3-subtitle">Live&nbsp;According&nbsp;to&nbsp;Fashion</h4>-->
-    <!--          </div>-->
-    <!--      </a> </div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="holder holder-mt-medium ">
         <div class="container">
             <a href="javascript:;" target="_blank" class="bnr-wrap bnr-">
@@ -197,9 +172,9 @@
                                     <div class="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                                         <i class="icon-palette"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
                                         <ul>
-                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-grey.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-green.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-grey.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-green.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-black.html')}}" alt=""></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -449,9 +424,9 @@
                                     <div class="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                                         <i class="icon-palette"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
                                         <ul>
-                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-grey.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-green.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-grey.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-green.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-black.html')}}" alt=""></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -701,9 +676,9 @@
                                     <div class="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                                         <i class="icon-palette"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
                                         <ul>
-                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-grey.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-green.html" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-grey.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-green.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-black.html')}}" alt=""></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -866,37 +841,5 @@
             </div>
         </div>
     </div>
-    <!--<div class="holder holder-mt-medium">-->
-    <!--<div class="container">-->
-    <!--<div class="title-wrap text-center ">-->
-    <!--  <h2 class="h1-style text-center"><a href="blog.html" title="View all">Latest From Blog</a></h2>-->
-    <!--  <div class="carousel-arrows" style="margin:0 auto 65px; width:50px;"></div>-->
-    <!--</div>-->
-    <!--<div class="post-prws post-prws-carousel post-prws--row js-post-prws-carousel" data-slick='{"slidesToShow": 3, "responsive": [{"breakpoint": 992,"settings": {"slidesToShow": 2 }},{"breakpoint": 480,"settings": {"slidesToShow": 1 }}]}'>-->
-    <!--  <div class="post-prw-vert col"> -->
-    <!--  	<a href="blog-post.html" class="post-prw-img image-hover-scale image-container" style="padding-bottom: 54.44%"> -->
-    <!--  		<img class="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-02.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-02.webp"> </a>-->
-    <!--      <h4 class="post-prw-title"><a href="blog-post.html">The High-Street Brand Fashion</a></h4>-->
-    <!--      <div class="post-prw-links">-->
-    <!--          <div class="post-prw-date"><i class="icon-calendar1"></i> June 9, 2020 </div>-->
-    <!--      </div>-->
-    <!--  </div>-->
-    <!--  <div class="post-prw-vert col"> <a href="blog-post.html" class="post-prw-img image-hover-scale image-container" style="padding-bottom: 54.44%">-->
-    <!--   <img class="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-03.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-03.webp"> </a>-->
-    <!--      <h4 class="post-prw-title"><a href="blog-post.html">Trends to Try This Season</a></h4>-->
-    <!--      <div class="post-prw-links">-->
-    <!--          <div class="post-prw-date"><i class="icon-calendar1"></i> June 3, 2020 </div>-->
-    <!--      </div>-->
-    <!--  </div>-->
-    <!--  <div class="post-prw-vert col"> <a href="blog-post.html" class="post-prw-img image-hover-scale image-container" style="padding-bottom: 54.44%"> -->
-    <!--  	<img class="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-04.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/blog/blog-fashion-04.webp"> </a>-->
-    <!--      <h4 class="post-prw-title"><a href="blog-post.html">Working From Home</a></h4>-->
-    <!--      <div class="post-prw-links">-->
-    <!--          <div class="post-prw-date"><i class="icon-calendar1"></i> June 1, 2020 </div>-->
-    <!--      </div>-->
-    <!--  </div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
 </div>
 @endsection

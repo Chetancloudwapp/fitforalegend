@@ -23,16 +23,16 @@
                         </div>
                         <div class="hdr_container_desktop">
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                <a href="account-create.html" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
+                                <a href="{{ route('web.registerUser') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
                                 <span class="dropdn-link-txt ">Account</span></a> 
                             </div>
                         </div>
                         <div class="dropdn dropdn_account dropdn_fullheight"> 
-                            <a href="account-wishlist.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-heart"></i>
+                            <a href="#" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-heart"></i>
                             <span class="dropdn-link-txt ">Wishlist</span></a> 
                         </div>
                         <div class="dropdn dropdn_account dropdn_fullheight"> 
-                            <a href="cart.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
+                            <a href="#" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
                             <span class="dropdn-link-txt ">Cart</span></a> 
                         </div>
                     </div>
@@ -47,10 +47,10 @@
                     <div class="col-auto show-mobile">
                         <div class="menu-toggle"> <a href="#" class="mobilemenu-toggle"><i class="icon-menu"></i></a> </div>
                     </div>
-                    <div class="col-auto hdr-logo"> <a href="index.html" class="logo"><img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
+                    <div class="col-auto hdr-logo"> <a href="{{ route('web.home')}}" class="logo"><img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                         <ul class="mmenu mmenu-js">
-                            <li class="mmenu-item--simple"><a href="index.html" class="active">Home</a>
+                            <li class="mmenu-item--simple"><a href="{{ route('web.home')}}" class="active">Home</a>
                             </li>
                             <li><a href="category.html">Accessories</a></li>
                             <li class="mmenu-item--mega">
@@ -293,10 +293,12 @@
                                 </div>
                             </div>
                             <div class="hdr_container_desktop">
-                                <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                    <a href="account-create.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
-                                    <span class="dropdn-link-txt ">Account</span></a> 
-                                </div>
+                                @guest
+                                    <div class="dropdn dropdn_account dropdn_fullheight"> 
+                                        <a href="{{ route('web.registerUser')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
+                                        <span class="dropdn-link-txt ">Account</span></a> 
+                                    </div>
+                                @endguest
                             </div>
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
                                 <a href="account-wishlist.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-heart"></i>
@@ -504,7 +506,7 @@
                                         <li class="active"><a href="#"><img src="{{ url('front/images/flags/en.html')}}" alt="">English</a></li>
                                         <li><a href="#"><img src="{{ url('front/images/flags/sp.html')}}" alt="">Spanish</a></li>
                                         <li><a href="#"><img src="{{ url('front/images/flags/de.html')}}" alt="">German</a></li>
-                                        <li><a href="#"><img src="{{ url('froont/images/flags/fr.html')}}" alt="">French</a></li>
+                                        <li><a href="#"><img src="{{ url('front/images/flags/fr.html')}}" alt="">French</a></li>
                                     </ul>
                                 </div>
                             </div>

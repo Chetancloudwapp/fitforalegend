@@ -15,9 +15,9 @@ use App\Http\Controllers\front\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function(){
 //     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
@@ -27,5 +27,12 @@ Route::get('/', function () {
 //     });
 // });
 
- Route::get('dashboard', [DashboardController::class, 'dashboard']);
- Route::match(['get', 'post'], '/create_account', [DashboardController::class, 'create_account']);
+Route::prefix('web')->group(function(){
+    Route::get('/', [DashboardController::class, 'home'])->name('web.home');
+    Route::match(['get','post'], '/register_user', [DashboardController::class, 'register_user'])->name('web.registerUser');
+    Route::match(['get','post'], '/user_login', [DashboardController::class, 'user_login'])->name('web.login');
+    Route::match(['get','post'], '/logout', [DashboardController::class, 'logout'])->name('web.logout');
+});
+ Route::group(['middleware' => ['checkuser']], function(){
+     Route::get('dashboard', [DashboardController::class, 'dashboard']);
+ });
