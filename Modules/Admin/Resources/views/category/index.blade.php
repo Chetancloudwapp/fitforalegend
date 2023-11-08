@@ -53,7 +53,13 @@
                                                 src="{{ url('uploads/categories', $category['image']) }}">
                                             </td>
                                             <td>{{ $category['name'] }}</td>
-                                            <td>{{ $category['status'] }}</td>
+                                            <td>
+                                                @if($category['status'] == 'Active')
+                                                   <span class="badge badge-pill badge-success">{{ $category['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $category['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
                                                 <a href="{{ url('admin/addcategory/'.$category['id']) }}"> <i class="fa-solid fa-pencil"></i></a>

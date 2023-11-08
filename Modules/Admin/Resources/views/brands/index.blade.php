@@ -53,7 +53,13 @@
                                                 src="{{ url('uploads/brands', $value['image']) }}">
                                             </td>
                                             <td>{{ $value['name'] }}</td>
-                                            <td>{{ $value['status'] }}</td>
+                                            <td>
+                                                @if($value['status'] == 'Active')
+                                                   <span style="text-align:center" class="badge badge-pill badge-success">{{ $value['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $value['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <a href="{{ url('admin/brands/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}

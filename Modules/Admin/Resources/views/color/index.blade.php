@@ -51,7 +51,13 @@
                                             <td>{{ $value['id'] }}</td>
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['color_code'] }}</td>
-                                            <td>{{ $value['status'] }}</td>
+                                            <td>
+                                                @if($value['status'] == 'Active')
+                                                   <span class="badge badge-pill badge-success">{{ $value['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $value['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
                                                 <a href="{{ url('admin/color/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>

@@ -55,7 +55,13 @@
                                             </td>
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['selling_price'] }}</td>
-                                            <td>{{ $value['status'] }}</td>
+                                            <td>
+                                                @if($value['status'] == 'Active')
+                                                   <span class="badge badge-pill badge-success">{{ $value['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $value['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 @if($value['parent_id'] == 0)
                                                      {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}"> <i class="fa-solid fa-plus"></i></a> --}}

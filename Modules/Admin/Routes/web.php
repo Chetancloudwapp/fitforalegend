@@ -12,7 +12,7 @@
 */
 
 Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index');
+    // Route::get('/', 'AdminController@index');
     Route::match(['get', 'post'], 'login', 'AdminController@login');
 
     Route::group(['middleware' => ['admin_auth']], function(){
@@ -65,4 +65,12 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/vendors/delete/{id}', 'VendorController@deletevendors');
     });
 });
+
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    echo 'Clear';
+    die();
+});
+
 

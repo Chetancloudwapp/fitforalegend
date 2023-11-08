@@ -7,6 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Vendor;
+use Modules\Admin\Entities\Country;
 use Validator;
 use Hash;
 
@@ -23,6 +24,7 @@ class VendorController extends Controller
 
     public function addVendors(Request $request, $id='')
     {
+        $get_countries = Country::get();
         if($id ==""){
             // Add Product
             $title = "Add Vendors";
@@ -42,10 +44,10 @@ class VendorController extends Controller
                 $req_fields['first_name']   = 'required';
             }
             else{
-                $req_fields['first_name']   = 'required';
-                $req_fields['last_name']   = 'required';
+                $req_fields['first_name']  = 'required|string|max:255';
+                $req_fields['last_name']   = 'required|string|max:255';
                 $req_fields['email'] = 'required|email|unique:vendors';
-                $req_fields['mobile'] = 'required';
+                $req_fields['mobile'] = 'required|min:5';
             }
             
             $customMessages = [
@@ -91,7 +93,7 @@ class VendorController extends Controller
             $vendors->save();
             return redirect('admin/vendors')->with('success_message', $message);
         }
-        return view('admin::vendors.addvendors')->with(compact('title','vendors'));
+        return view('admin::vendors.addvendors')->with(compact('title','vendors','get_countries'));
     }
 
      /* --- Delete Vendors --- */

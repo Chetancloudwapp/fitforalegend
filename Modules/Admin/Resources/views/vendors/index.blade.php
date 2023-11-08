@@ -54,11 +54,17 @@
                                             {{-- <td><img class="tbl-img-css rounded-circle" width="50px"
                                                 src="{{ url('uploads/products', $value['featured_image']) }}">
                                             </td> --}}
-                                            <td>{{ $value['first_name'] }}</td>
+                                            <td>{{ $value['first_name'] }} {{ $value['last_name']}}</td>
                                             <td>{{ $value['shop_name'] }}</td>
                                             <td>{{ $value['email'] }}</td>
-                                            <td>{{ $value['mobile'] }}</td>
-                                            <td>{{ $value['status'] }}</td>
+                                            <td>{{ $value['country_code']}} {{ $value['mobile'] }}</td>
+                                            <td>
+                                                @if($value['status'] == 'Active')
+                                                   <span class="badge badge-pill badge-success">{{ $value['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $value['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}" class="btn btn-primary btn-sm">Add Variation</a> --}}
                                                 {{-- <a href="{{ url('admin/product/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a> --}}

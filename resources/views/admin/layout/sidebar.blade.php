@@ -101,7 +101,7 @@
                     </ul>
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('admin/vendors')}}" class="nav-link {{ Request::is('admin/vendors') ? 'active' : ''}}"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+                    <a href="{{ url('admin/vendors')}}" class="nav-link {{ Request::is('admin/vendors') || Request::is('admin/vendors/add') ? 'active' : ''}}"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
                         <p>Vendors </p>
                     </a> 
                 </li>

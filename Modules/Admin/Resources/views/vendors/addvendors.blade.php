@@ -67,8 +67,26 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group mb-3 {{ $errors->has('country_code') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">Country Code</label>
+                                            <select class="form-control" name="country_code" id="country_code">
+                                                <option value="">Select Country Code</option>
+                                                @foreach($get_countries as $value)
+                                                    <option value="{{ $value['phoneCode']}}" {{ $value['phoneCode'] == $vendors['country_code'] ? 'selected' : ''}}>{{ $value['phoneCode']}}</option>
+                                                   {{-- <option value="{{ $value['id']}}" {{ $value['id'] == $products['color'] ? 'selected' : ''}}>{{ $value['name']}}</option> --}}
+
+                                                @endforeach
+                                            </select>
+                                            @error('country_code')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('mobile') ? 'has-danger' : '' }}">
-                                            <label class="col-form-label">Mobile<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
+                                            <label class="col-form-label">Mobile</label>
                                             <input
                                                 class="form-control {{ $errors->has('mobile') ? 'form-control-danger' : '' }}"
                                                 name="mobile" type="number"
@@ -86,7 +104,7 @@
                                             <input
                                                 class="form-control {{ $errors->has('email') ? 'form-control-danger' : '' }}"
                                                 name="email" type="text"
-                                                value="{{ old('email', $vendors['email']) }}" placeholder="Enter Cost Price">      
+                                                value="{{ old('email', $vendors['email']) }}" placeholder="Enter your email">      
                                             @error('email')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -136,20 +154,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3 {{ $errors->has('country_code') ? 'has-danger' : '' }}">
-                                            <label class="col-form-label">Country Code</label>
-                                            <input
-                                                class="form-control {{ $errors->has('country_code') ? 'form-control-danger' : '' }}"
-                                                name="country_code" type="text"
-                                                value="{{ old('country_code', $vendors['country_code']) }}" placeholder="Enter Product Weight">      
-                                            @error('country_code')
-                                            <div class="col-form-alert-label">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('status') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Status</label>

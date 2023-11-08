@@ -53,7 +53,13 @@
                                             <td>{{ $childcategory['cat_name'] }}</td>
                                             <td>{{ $childcategory['subcat_name'] }}</td>
                                             <td>{{ $childcategory['name'] }}</td>
-                                            <td>{{ $childcategory['status'] }}</td>
+                                            <td>
+                                                @if($childcategory['status'] == 'Active')
+                                                   <span class="badge badge-pill badge-success">{{ $childcategory['status']}}</span>
+                                                @else
+                                                   <span class="badge badge-pill badge-danger">{{ $childcategory['status'] }}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
                                                 <a href="{{ url('admin/addsubsubcat/'.$childcategory['id']) }}"> <i class="fa-solid fa-pencil"></i></a>

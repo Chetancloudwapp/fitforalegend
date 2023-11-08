@@ -18,6 +18,7 @@ class AdminDatabaseSeeder extends Seeder
 
         // $this->call("OthersTableSeeder");
         // $this->call(CategoryTableSeeder::class);
-        $this->call(VendorTableSeeder::class);
+        // $this->call(VendorTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
     }
 }
