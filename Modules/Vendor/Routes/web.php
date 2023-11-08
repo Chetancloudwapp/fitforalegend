@@ -20,11 +20,11 @@ Route::prefix('vendor')->group(function() {
         Route::get('/vendor-logout', 'VendorController@vendorLogout');
         Route::match(['get','post'], '/editvendors-shop', 'VendorController@editvendorShop');
         
-        
-        
-        
+    
         // Product
         Route::match(['get','post'], '/vendor-shop-view', 'VendorProductController@vendorShopView');
+        Route::match(['get','post'], '/vendor-shop-edit/{id}', 'VendorProductController@vendorEditShop');
+
         Route::match(['get','post'], '/vendor-product', 'VendorProductController@index');
         Route::match(['get','post'], '/vendor-product/add', 'VendorProductController@addVendorProduct');
         // Route::match(['get','post'], '/vendor-product/edit/{id}', 'VendorProductController@addProduct');

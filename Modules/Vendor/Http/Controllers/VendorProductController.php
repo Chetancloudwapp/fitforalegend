@@ -9,12 +9,14 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Product;
 use Modules\Admin\Entities\Categories;
 use Modules\Admin\Entities\Subcategory;
+use Modules\Admin\Entities\Country;
 use Modules\Admin\Entities\ChildCategory;
 use Modules\Admin\Entities\MasterBrand;
 use Modules\Admin\Entities\Vendor;
 use Modules\Admin\Entities\MasterColor;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Hash;
 
 
 class VendorProductController extends Controller
@@ -131,84 +133,66 @@ class VendorProductController extends Controller
         $common = [];
         $common['title'] = 'Vendor Details';
         $vendor_id = Auth::guard('vendor')->user()->id;
-        // dd($vendor_id);
         $vendors = Vendor::where('id', $vendor_id)->get();
-        // dd($vendors);
         return view('vendor::shopDetails.index')->with(compact('common','vendors'));
     }
 
-    // public function vendorShopView(Request $request, $id='')
-    // {
-    //     if($id ==""){
-    //         // Add Product
-    //         $title = "Add Vendors";
-    //         $vendors = new Vendor;
-    //         $message = "Vendor Added Successfully!";
-    //     }else{
-    //         $title = "Edit Vendor";
-    //         $id = decrypt($id);
-    //         $vendors = Vendor::find($id);
-    //         $message = "Vendor Updated Successfully!";
-    //     }
-    //     if($request->isMethod('post')){
-    //         $data = $request->all();
-    //         // dd($data);
-    //         $req_fields =  [];
-    //         if($request->id !=''){
-    //             $req_fields['first_name']   = 'required';
-    //         }
-    //         else{
-    //             $req_fields['first_name']  = 'required|string|max:255';
-    //             $req_fields['last_name']   = 'required|string|max:255';
-    //             $req_fields['email'] = 'required|email|unique:vendors';
-    //             $req_fields['mobile'] = 'required|min:5';
-    //         }
+    public function vendorEditShop(Request $request, $id)
+    {
+        $get_countries = Country::get();
+        $title = "Edit Vendor";
+        $id = decrypt($id);
+        // dd($id);
+        $vendors = Vendor::find($id);
+        $message = "Vendor Updated Successfully!";
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // dd($data);
+            $req_fields =  [];
+            if($request->id !=''){
+                $req_fields['first_name']   = 'required';
+            }
+            else{
+                $req_fields['first_name']  = 'required|string|max:255';
+                $req_fields['last_name']   = 'required|string|max:255';
+                $req_fields['email'] = 'required|email|unique:vendors';
+                $req_fields['mobile'] = 'required|min:5';
+            }
             
-    //         $customMessages = [
-    //             'name.required' => 'Name is required',
-    //             'email.required' => 'Email is required',
-    //             'email.email' => 'Valid Email is required',
-    //             'email.unique' => 'Unique Email is required',
-    //             'mobile.required' => 'Mobile number is required'
-    //         ];
+            $customMessages = [
+                'name.required' => 'Name is required',
+                'email.required' => 'Email is required',
+                'email.email' => 'Valid Email is required',
+                'email.unique' => 'Unique Email is required',
+                'mobile.required' => 'Mobile number is required'
+            ];
 
-    //         $validation = Validator::make($request->all(),
-    //             $req_fields,
-    //             [
-    //                 'required' => 'The :attribute field is required.',
-    //             ],
-    //             $customMessages
-    //         );
+            $validation = Validator::make($request->all(),
+                $req_fields,
+                [
+                    'required' => 'The :attribute field is required.',
+                ],
+                $customMessages
+            );
 
-    //         if ($validation->fails()) {
-    //             return back()->withErrors($validation)->withInput();
-    //         }
+            if ($validation->fails()) {
+                return back()->withErrors($validation)->withInput();
+            }
            
-    //         $vendors->first_name = $data['first_name'];            
-    //         $vendors->last_name = $data['last_name'];            
-    //         $vendors->mobile = $data['mobile'];
-    //         $vendors->email = $data['email'];
-    //         $vendors->password = Hash::make($data['password']);
-    //         $vendors->shop_name = $data['shop_name'];
-    //         $vendors->shop_address = $data['shop_address'];
-    //         $vendors->country_code = $data['country_code'];
-    //         $vendors->status = $data['status'];
-    //         // if ($request->hasFile('featured_image')) {
-    //         //     $random_no  = uniqid();
-    //         //     $img        = $request->file('featured_image');
-    //         //     $mime_type  =  $img->getMimeType();
-    //         //     $ext        = $img->getClientOriginalExtension();
-    //         //     $new_name   = $random_no . '.' . $ext;
-    //         //     $destinationPath =  public_path('uploads/vendors');
-    //         //     $img->move($destinationPath, $new_name);
-    //         //     $vendors->featured_image = $new_name;
-    //         // }
-            
-    //         $vendors->save();
-    //         return redirect('admin/vendors')->with('success_message', $message);
-    //     }
-    //     return view('admin::vendors.addvendors')->with(compact('title','vendors','get_countries'));
-    // }
+            $vendors->first_name = $data['first_name'];            
+            $vendors->last_name = $data['last_name'];            
+            $vendors->mobile = $data['mobile'];
+            $vendors->email = $data['email'];
+            $vendors->password = Hash::make($data['password']);
+            $vendors->shop_name = $data['shop_name'];
+            $vendors->shop_address = $data['shop_address'];
+            $vendors->country_code = $data['country_code'];
+            $vendors->status = $data['status'];
+            $vendors->save();
+            return redirect('vendor/vendor-shop-view')->with('success_message', $message);
+        }
+        return view('vendor::shopDetails.edit')->with(compact('title','vendors','get_countries'));
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -71,7 +71,7 @@
                                             <td class="text-center">
                                                 {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}" class="btn btn-primary btn-sm">Add Variation</a> --}}
                                                 {{-- <a href="{{ url('admin/product/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a> --}}
-                                                <a href="{{ url('admin/vendors/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                <a href="{{ url('vendor/vendor-shop-edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
                                                 <a href="javascript:void(0)" record="vendors/delete" record_id="{{ encrypt($value['id'])}}" class="confirmDelete" name="vendors" title="Delete Vendors Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
