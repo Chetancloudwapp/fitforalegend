@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('mobile') ? 'has-danger' : '' }}">
-                                            <label class="col-form-label">Mobile</label>
+                                            <label class="col-form-label">Mobile<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
                                             <input
                                                 class="form-control {{ $errors->has('mobile') ? 'form-control-danger' : '' }}"
                                                 name="mobile" type="number"

@@ -12,7 +12,7 @@
 */
 
 Route::prefix('vendor')->group(function() {
-    Route::get('/', 'VendorController@index');
+    // Route::get('/', 'VendorController@index');
     Route::match(['get', 'post'], '/vendor-login', 'VendorController@Vendorlogin');
 
     Route::group(['middleware' => ['vendor_auth']], function(){
@@ -20,13 +20,16 @@ Route::prefix('vendor')->group(function() {
         Route::get('/vendor-logout', 'VendorController@vendorLogout');
         Route::match(['get','post'], '/editvendors-shop', 'VendorController@editvendorShop');
         
-    
-        // Product
+        // Vendor Shop
         Route::match(['get','post'], '/vendor-shop-view', 'VendorProductController@vendorShopView');
         Route::match(['get','post'], '/vendor-shop-edit/{id}', 'VendorProductController@vendorEditShop');
 
+        // vendor Product 
         Route::match(['get','post'], '/vendor-product', 'VendorProductController@index');
         Route::match(['get','post'], '/vendor-product/add', 'VendorProductController@addVendorProduct');
+
+        Route::post('get-subcategory', 'VendorProductController@getSubcategory');
+        Route::post('get-childcategory', 'VendorProductController@getChildcategory');
         // Route::match(['get','post'], '/vendor-product/edit/{id}', 'VendorProductController@addProduct');
         // Route::match(['get','post'], '/product/delete/{id}', 'VendorProductController@deleteProduct');
     });

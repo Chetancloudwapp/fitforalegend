@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title nofloat"> <span>{{ $title}} </span>
                                 <span>
-                                <a href="{{ url('admin/vendors')}}">
+                                <a href="{{ url('vendor/vendor-shop-view')}}">
                                 <button onClick="back();"
                                     class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
                                     data-modal="modal-13" style="float: right"> <i class="ti-control-backward m-r-5"></i> Back
@@ -106,20 +106,6 @@
                                                 name="email" type="text"
                                                 value="{{ old('email', $vendors['email']) }}" placeholder="Enter your email">      
                                             @error('email')
-                                            <div class="col-form-alert-label">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3 {{ $errors->has('password') ? 'has-danger' : '' }}">
-                                            <label class="col-form-label">Password<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
-                                            <input
-                                                class="form-control {{ $errors->has('password') ? 'form-control-danger' : '' }}"
-                                                name="password" type="password"
-                                                value="{{ old('password', $vendors['password']) }}" placeholder="Enter Password">      
-                                            @error('password')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
                                             </div>

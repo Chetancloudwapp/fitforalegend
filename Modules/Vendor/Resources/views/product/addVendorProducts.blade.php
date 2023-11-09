@@ -404,7 +404,7 @@
       $('#parent_id').change(function () {
          var categoryId = $(this).val();       
          $.ajax({
-            url: "{{ url('admin/get-subcategory')}}", 
+            url: "{{ url('vendor/get-subcategory')}}", 
             method: 'POST',
             data: { category_id: categoryId, _token: "{{ csrf_token() }}" },
             success: function (data) {
@@ -428,7 +428,7 @@
       $('#subcategory_id').change(function () {
          var subcategoryId = $(this).val();       
          $.ajax({
-             url: "{{ url('admin/get-childcategory')}}", 
+             url: "{{ url('vendor/get-childcategory')}}", 
              method: 'POST',
              data: { subcategory_id: subcategoryId, _token: "{{ csrf_token() }}" },
             success: function (data) {

@@ -59,10 +59,11 @@
     <!-- Summernote-script -->
     <script src="{{ url('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 
-    
     <script src="{{ url('admin/js/adminlte2167.js?v=3.2.0')}}"></script>
     <script src="{{ url('admin/js/demo.js')}}"></script>
     <script src="{{ url('admin/js/pages/dashboard.js')}}"></script>
+    <!-- Custom Js File -->
+    <script src="{{ url('admin/js/custom.js')}}"></script>
     
     <script>
     $(function () {

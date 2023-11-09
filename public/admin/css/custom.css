@@ -18,7 +18,16 @@ h6.forgot_sec a{
 }
 
 .col-form-alert-label{
-    color:red;
+    color: #ff0000;
+}
+
+.has-danger .form-control {
+    border-color: #ff0000
+}
+
+.has-danger .col-form-label {
+    color: #e74c3c;
+
 }
 
 /*{

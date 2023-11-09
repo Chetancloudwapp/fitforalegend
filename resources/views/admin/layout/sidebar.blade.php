@@ -35,25 +35,25 @@
                     </ul>
                 </li> --}}
                 <li class="nav-item menu-is-opening menu-open"> 
-                    <a href="#" class="nav-link"> <i class="fa-solid fa-gear"></i>
+                    <a href="#" class="nav-link {{ Request::is('admin/change_password') || Request::is('admin/view_profile') || Request::is('admin/edit_profile')? 'active' : ''}}"> <i class="fa-solid fa-gear"></i>
                         <p> Settings <i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item"> 
-                            <a href="myprofile.php" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ url('admin/view_profile')}}" class="nav-link {{ Request::is('admin/view_profile') || Request::is('admin/edit_profile') ? 'active' : ''}}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Edit Profile </p>
                             </a> 
                         </li>
                         <li class="nav-item"> 
-                            <a href="change_password.php" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ url('admin/change_password')}}" class="nav-link {{ Request::is('admin/change_password') ? 'active' : ''}}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Change Password </p>
                             </a> 
                         </li>
-                        <li class="nav-item"> 
+                        {{-- <li class="nav-item"> 
                             <a href="deactive_account.php" class="nav-link"> <i class="far fa-circle nav-icon"></i>
                                 <p> Deactivate Account </p>
                             </a> 
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="nav-item"> 

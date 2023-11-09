@@ -103,7 +103,7 @@
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('vendor/vendor-shop-view')}}" class="nav-link {{ Request::is('vendor/vendor-shop-view') || Request::is('admin/vendors/add') ? 'active' : ''}}"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+                    <a href="{{ url('vendor/vendor-shop-view')}}" class="nav-link {{ Request::is('vendor/vendor-shop-view') || Request::is('vendor/vendor-shop-edit/{id}') ? 'active' : ''}}"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
                         <p>My Shop</p>
                     </a> 
                 </li>

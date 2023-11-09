@@ -34,7 +34,7 @@ class VendorProductController extends Controller
     {
         
         $get_parent_category = Categories::where('status', 'Active')->get();
-        $get_sub_category = Subcategory::where('status', 'Active')->get();
+        $get_sub_category   = Subcategory::where('status', 'Active')->get();
         $get_child_category = ChildCategory::where('status', 'Active')->get();
         $get_brands = MasterBrand::where('status','Active')->whereNull('deleted_at')->get();
         $get_colors = MasterColor::where('status','Active')->whereNull('deleted_at')->get();
@@ -51,6 +51,7 @@ class VendorProductController extends Controller
         }
         if($request->isMethod('post')){
             $data = $request->all();
+            // dd($data);
             $req_fields =  [];
             if($request->id !=''){
                 $req_fields['name']   = 'required';
@@ -128,6 +129,20 @@ class VendorProductController extends Controller
         return view('vendor::product.addVendorProducts')->with(compact('title','products', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors'));
     }
 
+    public function getSubcategory(Request $request) {
+        $categoryId = $request->input('category_id');
+        $subcategories = Subcategory::where('cat_id', $categoryId)->pluck('name', 'id');
+        return response()->json($subcategories);
+    }
+    
+    /* ---Get Childcategories Dropdown--- */
+
+    public function getChildcategory(Request $request) {
+        $subcategoryId = $request->input('subcategory_id');
+        $childcategories = ChildCategory::where('subcategories_id', $subcategoryId)->pluck('name', 'id');
+        return response()->json($childcategories);
+    }
+
     public function vendorShopView(Request $request)
     {
         $common = [];
@@ -183,7 +198,6 @@ class VendorProductController extends Controller
             $vendors->last_name = $data['last_name'];            
             $vendors->mobile = $data['mobile'];
             $vendors->email = $data['email'];
-            $vendors->password = Hash::make($data['password']);
             $vendors->shop_name = $data['shop_name'];
             $vendors->shop_address = $data['shop_address'];
             $vendors->country_code = $data['country_code'];

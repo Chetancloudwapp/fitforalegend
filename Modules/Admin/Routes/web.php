@@ -13,10 +13,15 @@
 
 Route::prefix('admin')->group(function() {
     // Route::get('/', 'AdminController@index');
-    Route::match(['get', 'post'], 'login', 'AdminController@login');
-
+    Route::match(['get','post'], 'login', 'AdminController@login');
+    
+    
     Route::group(['middleware' => ['admin_auth']], function(){
         Route::get('dashboard', 'AdminController@dashboard');
+        Route::match(['get','post'], '/check_current_password', 'AdminController@CheckCurrentPassword');
+        Route::match(['get','post'], '/change_password', 'AdminController@ChangePassword');
+        Route::get('/view_profile', 'AdminController@ViewProfile');
+        Route::match(['get','post'], '/edit_profile', 'AdminController@EditProfile');
         Route::get('logout', 'AdminController@logout');
        
         // Categories
