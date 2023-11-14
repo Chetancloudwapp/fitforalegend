@@ -24,4 +24,8 @@ class Subcategory extends Model
         return $this->belongsTo(Categories::class);
     }
 
+    public function childcategories(){
+        return $this->hasMany('Modules\Admin\Entities\ChildCategory', 'subcategories_id')->where('status', 'Active');
+    }
+
 }

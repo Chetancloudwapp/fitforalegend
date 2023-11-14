@@ -56,8 +56,8 @@
                         </li> --}}
                     </ul>
                 </li>
-                <li class="nav-item"> 
-                    <a href="{{ url('admin/category')}}" class="nav-link {{ Request::is('admin/category') || Request::is('admin/subcategory') ||  Request::is('admin/childcategory') ? 'active' : '' }}"><i class="fa-solid fa-layer-group"></i>&nbsp;&nbsp;
+                <li class="nav-item menu-is-opening menu-open"> 
+                    <a href="{{ url('admin/category')}}" class="nav-link {{ Request::is('admin/category') || Request::is('admin/subcategory') || Request::is('admin/addsubcat')||  Request::is('admin/childcategory') || Request::is('admin/addchildcategory') ? 'active' : '' }}"><i class="fa-solid fa-layer-group"></i>&nbsp;&nbsp;
                         <p>Category<i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -67,19 +67,19 @@
                             </a> 
                         </li>
                         <li class="nav-item"> 
-                            <a href="{{ url('admin/subcategory')}}" class="nav-link {{ Request::is('admin/subcategory') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ url('admin/subcategory')}}" class="nav-link {{ Request::is('admin/subcategory') || Request::is('admin/addsubcat') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Sub Category </p>
                             </a> 
                         </li>
                         <li class="nav-item"> 
-                            <a href="{{ url('admin/childcategory')}}" class="nav-link {{ Request::is('admin/childcategory') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ url('admin/childcategory')}}" class="nav-link {{ Request::is('admin/childcategory') || Request::is('admin/addchildcategory') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Child Category </p>
                             </a> 
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item"> 
-                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') || Request::is('admin/variation/add/{id}')? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;&nbsp;
+                    <a href="{{ url('admin/product')}}" class="nav-link {{ Request::is('admin/product') || Request::is('admin/product/add') || Request::is('admin/brands') || Request::is('admin/brands/add') || Request::is('admin/color') ||  Request::is('admin/color/add') || Request::is('admin/variation/add/{id}') || Request::is('admin/size') ? 'active' : '' }}"> <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;&nbsp;
                         <p>Product<i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -96,6 +96,11 @@
                         <li class="nav-item"> 
                             <a href="{{ url('admin/color')}}" class="nav-link {{ Request::is('admin/color') || Request::is('admin/color/add') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
                                 <p> Color </p>
+                            </a> 
+                        </li>
+                        <li class="nav-item"> 
+                            <a href="{{ url('admin/size')}}" class="nav-link {{ Request::is('admin/size') || Request::is('admin/size/add') ? 'active' : '' }}"> <i class="far fa-circle nav-icon"></i>
+                                <p> Size </p>
                             </a> 
                         </li>
                     </ul>

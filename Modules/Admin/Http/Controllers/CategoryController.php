@@ -98,7 +98,7 @@ class CategoryController extends Controller
     }
 
      // Add Subcategory
-    public function subCategory(Request $request, $id=NULL)
+    public function subCategory(Request $request, $id="")
     {
         $get_parent_category = Categories::where('status', 'Active')->get();
         if($id==""){
@@ -150,37 +150,67 @@ class CategoryController extends Controller
 
     /* ----Add CHILD CATEGORY---  */
 
-    public function ChildCategory(Request $request, $id='')
+    public function addChildCategory(Request $request, $id="")
     {
+        // $ChildCategory = ChildCategory::find($id);
         $get_parent_category = Categories::where('status', 'Active')->get();
+        // $get_sub_category = Subcategory::where('status', 'Active')->whereIn('cat_id', [$ChildCategory->cat_id])->get();
         $get_sub_category = Subcategory::where('status', 'Active')->get();
+        // $get_sub_category = Subcategory::select('subcategories.*', 'subcategories.name as subcat_name')
+        // ->join('childcategories', 'childcategories.cat_id', '=', 'subcategories.cat_id')
+        // ->get();
+        // dd($get_sub_category);
         if($id==""){
+            // return "hello form childcategory";
             $title = "Add Child Category";
             $ChildCategory = new ChildCategory;
             $message = "Child Category Added Successfully!";
         }else{
+            // dd('hello');
             $title = "Edit Child Category";
             $ChildCategory = ChildCategory::find($id);
             $message = "Child Category Updated Successfully!";
         }
         if($request->isMethod('post')){
             $data = $request->all();
+
             // echo "<pre>"; print_r($data); die;
-
-            $rules = [
-                'name' => 'required',
-            ];
-
+            $req_fields =  [];
+            if($request->id !=''){
+                $req_fields['name']   = 'required';
+                $req_fields['parent_category'] = 'required';
+                $req_fields['subcategory_id'] = 'required';
+            }
+            else{
+                $req_fields['name']   = 'required';
+                $req_fields['parent_category'] = 'required';
+                $req_fields['subcategory_id'] = 'required';
+            }
+            
             $customMessages = [
                 'name.required' => 'Name is required',
+                'parent_category.required' => 'Parent Category is required',
+                'subcategory_id.required' => 'Sub Category is required',
             ];
 
-            $this->validate($request, $rules, $customMessages);
-            
+            $validation = Validator::make($request->all(),
+                $req_fields,
+                [
+                    'required' => 'The :attribute field is required.',
+                ],
+                $customMessages
+            );
+
+            if ($validation->fails()) {
+                return back()->withErrors($validation)->withInput();
+            }
+
+            // $this->validate($request, $rules, $customMessages);
             $ChildCategory->name = $data['name'];
-            $ChildCategory->cat_id = $data['parent_id'];
+            $ChildCategory->cat_id = $data['parent_category'];
             $ChildCategory->subcategories_id = $data['subcategory_id'];
             $ChildCategory->save();
+            // dd($ChildCategory);
             return redirect('admin/childcategory')->with('success_message', $message);
         }
         return view('admin::category.addchildcat')->with(compact('title','ChildCategory', 'get_sub_category', 'get_parent_category'));

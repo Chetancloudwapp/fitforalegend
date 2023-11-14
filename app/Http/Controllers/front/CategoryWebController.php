@@ -10,6 +10,6 @@ use Modules\Admin\Entities\ChildCategory;
 
 class CategoryWebController extends Controller
 {
-    // $categories = Categories::where('status', 'Active')->whereNull('is_delete')->get();
-    // return view()
+    // $categories = Categories::where('status', 'Active')->whereNull('deleted_at')->get();
+    // return view();
 }

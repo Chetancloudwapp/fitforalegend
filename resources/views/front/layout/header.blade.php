@@ -1,3 +1,19 @@
+<?php
+use Modules\Admin\Entities\Categories;
+// use Modules\Admin\Entities\Subcategory;
+// $categories = Categories::select('category.*', 'subcategories.name as subcat_name', 'childcategories.name as childcat_name')
+// ->join('subcategories', 'subcategories.cat_id', '=', 'category.id')
+// ->join('childcategories', 'childcategories.cat_id', '=', 'category.id')
+// ->get()->toArray();
+// $categories = Categories::select('category.*', 'subcategories.name as subcat_name')
+// ->join('subcategories', 'subcategories.cat_id', '=', 'category.id')
+// ->get()->toArray();
+
+// $categories = Categories::where('status', 'Active')->get()->toArray();
+$categories = Categories::categories();
+// echo "<pre>"; print_r($categories); die;
+
+?>
 <header class="hdr-wrap">
     <div class="hdr-content hdr-content-sticky">
         <div class="container">
@@ -52,232 +68,33 @@
                         <ul class="mmenu mmenu-js">
                             <li class="mmenu-item--simple"><a href="{{ route('web.home')}}" class="active">Home</a>
                             </li>
-                            <li><a href="category.html">Accessories</a></li>
+                            {{-- <li><a href="category.html">Accessories</a></li> --}}
+                            @foreach($categories as $category)
+                            @if(count($category)>0)
                             <li class="mmenu-item--mega">
-                                <a href="category.html">Men</a>
+                                <a href="category.html">{{ $category['name']}}</a>
                                 <div class="mmenu-submenu mmenu-submenu--has-bottom">
                                     <div class="mmenu-submenu-inside">
                                         <div class="container">
                                             <div class="mmenu-cols column-5">
+                                                @foreach($category['subcategories'] as $subcategory)
                                                 <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Topwear</a></h3>
+                                                    <h3 class="submenu-title"><a href="category.html">{{ $subcategory['name']}}</a></h3>
                                                     <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
+                                                        @foreach($subcategory['childcategories'] as $childcategory)
+                                                        <li><a href="category.html">{{ $childcategory['name'] }}</a></li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Footwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Bottomwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses<span class="menu-label menu-label--color3">SALE</span></a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts</a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                        <li><a href="category.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Indian Wear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Sports Wear
-                                                        </a>
-                                                    </h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label menu-label--color1">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
+                                                @endforeach
                                                 <div class="mmenu-bottom justify-content-center"> <a href="#"><i class="icon-fox icon--lg"></i><b>FOXshop News</b><i class="icon-arrow-right"></i></a> </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="mmenu-item--mega">
-                                <a href="category.html">Women</a>
-                                <div class="mmenu-submenu mmenu-submenu--has-bottom">
-                                    <div class="mmenu-submenu-inside">
-                                        <div class="container">
-                                            <div class="mmenu-cols column-5">
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Topwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Footwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Bottomwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses<span class="menu-label menu-label--color3">SALE</span></a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts</a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                        <li><a href="category.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Indian Wear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Sports Wear
-                                                        </a>
-                                                    </h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label menu-label--color1">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-bottom justify-content-center"> <a href="#"><i class="icon-fox icon--lg"></i><b>FOXshop News</b><i class="icon-arrow-right"></i></a> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="mmenu-item--mega">
-                                <a href="category.html">Kids</a>
-                                <div class="mmenu-submenu mmenu-submenu--has-bottom">
-                                    <div class="mmenu-submenu-inside">
-                                        <div class="container">
-                                            <div class="mmenu-cols column-5">
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Topwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Footwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Bottomwear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses<span class="menu-label menu-label--color3">SALE</span></a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts</a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                        <li><a href="category.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Indian Wear</a></h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">Sports Wear
-                                                        </a>
-                                                    </h3>
-                                                    <ul class="submenu-list">
-                                                        <li><a href="category.html">Jackets</a></li>
-                                                        <li><a href="category.html">Dresses</a></li>
-                                                        <li><a href="category.html">Blouses & Tops</a></li>
-                                                        <li><a href="category.html">Cardigans & Pullovers</a></li>
-                                                        <li><a href="category.html">Skirts<span class="menu-label menu-label--color1">SALE</span></a></li>
-                                                        <li><a href="category.html">Pants & Shorts</a></li>
-                                                        <li><a href="category.html">Outerwear</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="mmenu-bottom justify-content-center"> <a href="#"><i class="icon-fox icon--lg"></i><b>FOXshop News</b><i class="icon-arrow-right"></i></a> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            @endif
+                            @endforeach
                         </ul>
                     </div>
                     <div class="hdr-links-wrap col-auto ml-auto">

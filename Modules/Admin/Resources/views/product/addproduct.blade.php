@@ -99,10 +99,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('size') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Size<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
-                                            <input
-                                                class="form-control {{ $errors->has('size') ? 'form-control-danger' : '' }}"
-                                                name="size" type="text"
-                                                value="{{ old('size', $products['size']) }}" placeholder="Enter Size">      
+                                            <select class="form-control" id="size" name="size">
+                                                <option value="">Select Size</option>
+                                                @foreach($get_size as $value)
+                                                    <option value="{{ $value['id']}}" {{ $value['id'] == $products['size'] ? 'selected' : ''}}>{{ $value['name']}}</option>
+                                                @endforeach
+                                            </select>    
                                             @error('size')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}

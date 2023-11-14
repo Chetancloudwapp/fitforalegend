@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Child Category </h1>
+                    <h1>Size</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Child Category</li>
+                        <li class="breadcrumb-item active">Size</li>
                     </ol>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                                 </button>
                               </div>
                             @endif
-                            <h3 class="card-title nofloat"> <span>Child Category</span>
-                            	<span> <a href="{{ url('admin/addchildcategory') }}"> <button type="button" class="btn btn-block btn-primary">Add Child Categories</button> </a> </span>
+                            <h3 class="card-title nofloat"> <span>Size List</span>
+                            	<span> <a href="{{ url('admin/size/add') }}"> <button type="button" class="btn btn-block btn-primary">Add Size</button> </a></span>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -39,32 +39,20 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Category</th>
-                                        <th>Subcategory</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
+                                        <th>Size Name</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($ChildCategory as $key  => $childcategory)
+                                    @foreach($size as $key => $value)
                                         <tr>
-                                            <td>{{ ++$key }}</td>
-                                            <td>{{ $childcategory['cat_name'] }}</td>
-                                            <td>{{ $childcategory['subcat_name'] }}</td>
-                                            <td>{{ $childcategory['name'] }}</td>
-                                            <td>
-                                                @if($childcategory['status'] == 'Active')
-                                                   <span class="badge badge-pill badge-success">{{ $childcategory['status']}}</span>
-                                                @else
-                                                   <span class="badge badge-pill badge-danger">{{ $childcategory['status'] }}</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $value['id'] }}</td>
+                                            <td>{{ $value['name'] }}</td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
-                                                <a href="{{ url('admin/addchildcategory/'.$childcategory['id']) }}"> <i class="fa-solid fa-pencil"></i></a>
-                                                {{-- <a href="{{ url('admin/delete_childcategories/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="childcategories" record_id="{{ $childcategory['id'] }}" class="confirmDelete" name="childCategory" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a href="{{ url('admin/size/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
+                                                <a href="javascript:void(0)" record="size/delete" record_id="{{ encrypt($value['id']) }}" class="confirmDelete" name="size" title="Delete Size Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -98,7 +86,7 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location.href = "/admin/delete_"+record+"/"+record_id;
+                window.location.href = "/admin/"+record+"/"+record_id;
             }
             });
 

@@ -12,6 +12,7 @@ use Modules\Admin\Entities\Subcategory;
 use Modules\Admin\Entities\ChildCategory;
 use Modules\Admin\Entities\MasterBrand;
 use Modules\Admin\Entities\MasterColor;
+use Modules\Admin\Entities\MasterSize;
 use Validator;
 use DB;
 
@@ -37,6 +38,7 @@ class ProductController extends Controller
         $get_child_category = ChildCategory::where('status', 'Active')->get();
         $get_brands = MasterBrand::where('status','Active')->whereNull('deleted_at')->get();
         $get_colors = MasterColor::where('status','Active')->whereNull('deleted_at')->get();
+        $get_size = MasterSize::whereNull('deleted_at')->get();
         if($id ==""){
             // Add Product
             $title = "Add Product";
@@ -123,7 +125,7 @@ class ProductController extends Controller
             $products->save();
             return redirect('admin/product')->with('success_message', $message);
         }
-        return view('admin::product.addproduct')->with(compact('title','products', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors'));
+        return view('admin::product.addproduct')->with(compact('title','products', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors', 'get_size'));
     }
 
 

@@ -6,21 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ChildCategory extends Model
+class MasterSize extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
     protected $fillable = [];
-    protected $table = "childcategories";
     
     protected static function newFactory()
     {
-        return \Modules\Admin\Database\factories\ChildCategoryFactory::new();
+        return \Modules\Admin\Database\factories\MasterSizeFactory::new();
     }
-
-    public function subcategory() {
-        return $this->belongsTo(Category::class);
-    }
-
 }

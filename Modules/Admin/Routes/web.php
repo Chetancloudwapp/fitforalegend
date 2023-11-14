@@ -33,12 +33,12 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/subcategory', 'CategoryController@subcategoryindex');
         Route::match(['get','post'], '/addsubcat/{id?}', 'CategoryController@subCategory');
         Route::match(['get', 'post'], '/delete_subcategories/{id?}', 'CategoryController@delete_subcategories');
-        Route::post('get-subcategories', '/CategoryController@getSubcategories');
+        Route::post('get-subcategories', 'CategoryController@getSubcategories');
         
         // ChildCategories
         Route::match(['get','post'], '/childcategory', 'CategoryController@childcategoryindex');
-        Route::match(['get','post'], '/addsubsubcat/{id?}', 'CategoryController@ChildCategory');
-        Route::match(['get', 'post'], '/delete_childcategories/{id?}', 'CategoryController@delete_childcategories');
+        Route::match(['get','post'], '/addchildcategory/{id?}', 'CategoryController@addChildCategory');
+        Route::match(['get','post'], '/delete_childcategories/{id?}', 'CategoryController@delete_childcategories');
         
         // Products
         Route::match(['get','post'], '/product', 'ProductController@index');
@@ -62,6 +62,12 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/color/add', 'ColorController@addcolors');
         Route::match(['get','post'], '/color/edit/{id}', 'ColorController@addcolors');
         Route::match(['get','post'], '/color/delete/{id}', 'ColorController@deletecolor');
+
+        // Size 
+        Route::match(['get','post'], '/size', 'SizeController@index');
+        Route::match(['get','post'], '/size/add', 'SizeController@addSize');
+        Route::match(['get','post'], '/size/edit/{id}', 'SizeController@addSize');
+        Route::match(['get','post'], '/size/delete/{id}', 'SizeController@deletesize');
         
         // Vendors
         Route::match(['get','post'], '/vendors', 'VendorController@index');

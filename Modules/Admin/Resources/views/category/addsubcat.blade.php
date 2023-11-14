@@ -40,7 +40,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form name="categoryForm" id="categoryForm" 
+                            <form name="SubcategoryForm" id="SubcategoryForm" 
                             @if(empty($subcategory['id'])) action="{{ url('admin/addsubcat')}}" 
                             @else 
                                action="{{ url('admin/addsubcat/'.$subcategory['id']) }}" 
