@@ -31,7 +31,7 @@
                             </a></h3>
                         </div>
                         <div class="card-body">
-                            @if ($errors->any())
+                            {{-- @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
                                         @foreach ($errors->all() as $error)
@@ -39,7 +39,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                            @endif
+                            @endif --}}
                             <form name="SubcategoryForm" id="SubcategoryForm" 
                             @if(empty($subcategory['id'])) action="{{ url('admin/addsubcat')}}" 
                             @else 
@@ -49,8 +49,8 @@
                                 @csrf
                                 <div class="card-body">
                                     <input type="hidden" name="id" value="{{$subcategory['id']}}">
-                                    <div class="form-group"> 
-                                        <label for="title">Parent Category*</label>
+                                    <div class="form-group {{ $errors->has('parent_id') ? 'has-danger' : '' }}"> 
+                                        <label for="title">Parent Category<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
                                         <select class="form-control" name="parent_id">
                                             <option value="">Select Category</option>
                                             @foreach ($get_parent_category as $value)
@@ -61,10 +61,23 @@
                                                 </option>
                                             @endforeach
                                         </select> 
+                                        @error('parent_id')
+                                        <div class="col-form-alert-label">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
-                                    <div class="form-group"> 
-                                        <label for="name">Name*</label> 
-                                        <input type="text" class="form-control" value="{{ old('name' , $subcategory['name'])}}" id="name" name="name" placeholder="Enter Category">
+                                    <div class="form-group mb-3 {{ $errors->has('name') ? 'has-danger' : '' }}">
+                                        <label class="col-form-label">Name<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
+                                        <input
+                                            class="form-control {{ $errors->has('name') ? 'form-control-danger' : '' }}"
+                                            name="name" type="text"
+                                            value="{{ old('name', $subcategory['name']) }}" placeholder="Enter name">      
+                                        @error('name')
+                                        <div class="col-form-alert-label">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group mb-3 {{ $errors->has('status') ? 'has-danger' : '' }}">
                                         <label class="col-form-label">Status</label>

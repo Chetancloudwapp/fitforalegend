@@ -46,7 +46,7 @@
                                 <tbody>
                                     @foreach($size as $key => $value)
                                         <tr>
-                                            <td>{{ $value['id'] }}</td>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{ $value['name'] }}</td>
                                             <td class="text-center">
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}

@@ -46,9 +46,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($subcategory as $subcategory)
+                                    @foreach($subcategory as $key => $subcategory)
                                         <tr>
-                                            <td>{{ $subcategory['id'] }}</td>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{ $subcategory['cat_name'] }}</td>
                                             <td>{{ $subcategory['name'] }}</td>
                                             <td>

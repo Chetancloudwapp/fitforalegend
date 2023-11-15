@@ -17,14 +17,13 @@ class BrandController extends Controller
     {
         $common = [];
         $common['title'] = "Brands";
-        $brands = MasterBrand::where('status', 'Active')->whereNull('deleted_at')->get();
+        $brands = MasterBrand::where('status', 'Active')->whereNull('deleted_at')->orderBy('id', 'desc')->get();
         return view('admin::brands.index')->with(compact('common', 'brands'));
     }
 
     /* --- ADD BRANDS --- */
     public function addbrands(Request $request, $id='')
     {
-        
         if($request->id==""){
             // Add Product
             $title = "Add Brands";
@@ -36,30 +35,27 @@ class BrandController extends Controller
             $brands = MasterBrand::find($id);
             $message = "Brand Updated Successfully!";
         }
-        if($request->isMethod('post')){
+        if($request->method('post') == 'POST'){
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
 
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             else{
-                $req_fields['name']   = 'required';
-    
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['image']  = 'mimes:jpeg,jpg,png,gif|required|max:10000';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
+                'name.regex'    => 'Valid name is required',
+                'image.required' => 'Image is required',
+                'image.mimes'    => 'Valid Image is required',
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();

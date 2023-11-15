@@ -48,7 +48,7 @@
                                 <tbody>
                                     @foreach($brands as $key => $value)
                                         <tr>
-                                            <td>{{ $value['id'] }}</td>
+                                            <td>{{ ++$key }}</td>
                                             <td><img class="tbl-img-css rounded-circle" width="50px"
                                                 src="{{ url('uploads/brands', $value['image']) }}">
                                             </td>

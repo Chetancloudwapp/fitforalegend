@@ -1,14 +1,5 @@
 <?php
 use Modules\Admin\Entities\Categories;
-// use Modules\Admin\Entities\Subcategory;
-// $categories = Categories::select('category.*', 'subcategories.name as subcat_name', 'childcategories.name as childcat_name')
-// ->join('subcategories', 'subcategories.cat_id', '=', 'category.id')
-// ->join('childcategories', 'childcategories.cat_id', '=', 'category.id')
-// ->get()->toArray();
-// $categories = Categories::select('category.*', 'subcategories.name as subcat_name')
-// ->join('subcategories', 'subcategories.cat_id', '=', 'category.id')
-// ->get()->toArray();
-
 // $categories = Categories::where('status', 'Active')->get()->toArray();
 $categories = Categories::categories();
 // echo "<pre>"; print_r($categories); die;

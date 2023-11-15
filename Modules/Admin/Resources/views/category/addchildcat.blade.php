@@ -94,7 +94,7 @@
                                         @enderror
                                         </div>
                                     </div>   --}}
-                                    <div class="form-group"> 
+                                    <div class="form-group {{ $errors->has('subcategory_id') ? 'has-danger' : '' }}"> 
                                         <label for="title">Sub Category*</label>
                                         <select class="form-control" id="subcategory_id" name="subcategory_id">
                                             <option value="">Select Sub Category</option>
@@ -106,12 +106,12 @@
                                                 {{ $value['name'] }}
                                             </option>
                                         @endforeach
-                                            @foreach($data as $value)
-                                                <option value="{{ $value['id']}}" {{ $value['id'] == $ChildCategory['subcategories_id'] ? 'selected' : ''}}>{{ $value['name']}}
-                                                </option>
-                                            @endforeach
-                                           
                                         </select> 
+                                        @error('subcategory_id')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     {{-- <div class="form-group"> 
                                         <label for="title">Name*</label> 

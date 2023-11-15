@@ -14,7 +14,10 @@ class ColorController extends Controller
     use ValidatesRequests;
     public function index()
     {
-        $color = MasterColor::get();
+        $color = MasterColor::where('status', 'Active')
+                             ->whereNull('deleted_at')
+                             ->orderBy('id','desc')
+                             ->get();
         return view('admin::color.index')->with(compact('color'));
     }
 
@@ -39,24 +42,18 @@ class ColorController extends Controller
 
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             else{
-                $req_fields['name']   = 'required';
-    
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
+                'name.regex'    => 'Valid name is required',
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();

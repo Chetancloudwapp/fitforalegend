@@ -1,3 +1,9 @@
+<?php
+// use Modules\Admin\Entities\Product;
+// // $categories = Categories::where('status', 'Active')->get()->toArray();
+// $products = Product::where('status', 'Active')->get()->toArray();
+// echo "<pre>"; print_r($products); die;
+?>
 @extends('front.layout.master')
 @section('content')
 <div class="page-content">

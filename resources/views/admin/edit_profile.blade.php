@@ -33,15 +33,6 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             @if(Session::has('success_message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Success:</strong> {{ Session::get('success_message')}}
@@ -75,12 +66,22 @@
                                                         <label for="exampleInputEmail1">Full name</label> 
                                                         <input type="text" id="name" value="{{ Auth::guard('admin')->user()->name }}" name="name" class="form-control" placeholder="Enter full name"> 
                                                     </div>
+                                                    @error('name')
+                                                        <div class="col-form-alert-label">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group"> 
                                                         <label for="exampleInputPassword1">Email id</label> 
                                                         <input type="email" id="email" name="email" value="{{ Auth::guard('admin')->user()->email }}" class="form-control" placeholder="Enter email id"> 
                                                     </div>
+                                                    @error('email')
+                                                        <div class="col-form-alert-label">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 {{-- <div class="col-md-6">
                                                     <div class="form-group"> 

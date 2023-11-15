@@ -41,30 +41,25 @@ class VendorController extends Controller
             // dd($data);
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['first_name']   = 'required';
+                $req_fields['first_name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             else{
-                $req_fields['first_name']  = 'required|string|max:255';
-                $req_fields['last_name']   = 'required|string|max:255';
+                $req_fields['first_name']  = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['last_name']  = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
                 $req_fields['email'] = 'required|email|unique:vendors';
-                $req_fields['mobile'] = 'required|min:5';
+                $req_fields['mobile']  = 'required|min:10';
             }
             
             $customMessages = [
-                'name.required' => 'Name is required',
+                'first_name.required' => 'First name is required',
+                'last_name.required' => 'Last name is required',
                 'email.required' => 'Email is required',
                 'email.email' => 'Valid Email is required',
                 'email.unique' => 'Unique Email is required',
                 'mobile.required' => 'Mobile number is required'
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();

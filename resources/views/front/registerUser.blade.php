@@ -16,7 +16,7 @@
 				<h2 class="text-center">Create an Account</h2>
 				<div class="form-wrapper">
 					<p>To access your whishlist, address book and contact preferences and to take advantage of our speedy checkout, create an account with us now.</p>
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -24,7 +24,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                    @endif --}}
                     @if(Session::has('success_message'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Success:</strong> {{ Session::get('success_message')}}
@@ -38,7 +38,7 @@
 						<div class="row">
 							<div class="col-sm-9">
 								<div class="form-group">
-									<input type="text" name="first_name" class="form-control" placeholder="First name">
+									<input type="text" name="first_name" value="{{ old('first_name')}}" class="form-control" placeholder="First name">
 								</div>
                                 @error('first_name')
                                 <div class="col-form-alert-label">
@@ -48,7 +48,7 @@
 							</div>
 							<div class="col-sm-9">
 								<div class="form-group">
-									<input type="text" name="last_name" class="form-control" placeholder="Last name">
+									<input type="text" name="last_name" value="{{ old('last_name')}}" class="form-control" placeholder="Last name">
 								</div>
                                 @error('last_name')
                                 <div class="col-form-alert-label">
@@ -58,7 +58,7 @@
 							</div>
 							<div class="col-sm-9">
 								<div class="form-group">
-									<input type="text" name="email" class="form-control" placeholder="Enter email">
+									<input type="text" name="email" value="{{ old('email')}}" class="form-control" placeholder="Enter email">
 								</div>
                                 @error('email')
                                 <div class="col-form-alert-label">
@@ -85,22 +85,6 @@
                                 </div>
                             @enderror
 							</div>
-							{{-- <div class="col-md-6">
-								<div class="form-group mb-3 {{ $errors->has('status') ? 'has-danger' : '' }}">
-									<label class="col-form-label">Status</label>
-									<select id="status" name="status" class="form-control stock">
-										<option value="Active">Active</option>
-										<option value="Deactive"
-										{{ $vendors['status'] == 'Deactive' ? 'selected' : '' }}>Deactive
-										</option>
-									</select>
-									@error('status')
-									<div class="col-form-alert-label">
-										{{ $message }}
-									</div>
-									@enderror
-								</div>
-							</div> --}}
 						</div>
 						<div class="form-group">
 							<input type="password" name="password" class="form-control" placeholder="Password">

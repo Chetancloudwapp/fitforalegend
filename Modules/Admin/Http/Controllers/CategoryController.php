@@ -20,13 +20,15 @@ class CategoryController extends Controller
     // category Index
     public function index()
     {
-        // return view('admin::index');
-        $categories = Categories::get();
+        $categories = Categories::where('status', 'Active')
+                        ->whereNull('deleted_at')
+                        ->orderBy('id', 'desc')
+                        ->get();
         return view('admin::category.index')->with(compact('categories'));
     }
     
     // Add Category
-    public function addEditCategory(Request $request, $id=Null)
+    public function addEditCategory(Request $request, $id="")
     {
         if($id==""){
             // Add Category
@@ -44,25 +46,21 @@ class CategoryController extends Controller
 
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             else{
-                $req_fields['name']   = 'required';
-                $req_fields['image']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['image']  = 'mimes:jpeg,jpg,png,gif|required|max:10000';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
-                'image.required' => 'Image is required'
+                'name.regex'    => 'Valid name is required',
+                'image.required' => 'Image is required',
+                'image.mimes'   =>  'Valid image is required',
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();
@@ -70,17 +68,19 @@ class CategoryController extends Controller
 
             // $this->validate($request, $rules, $customMessages);
 
-            $category->name = $data['name'];
+            $category->name   = $data['name'];
             $category->status = $data['status'];
-            if ($request->hasFile('image')) {
-                $random_no  = uniqid();
-                $img        = $request->file('image');
-                $mime_type  =  $img->getMimeType();
-                $ext        = $img->getClientOriginalExtension();
-                $new_name   = $random_no . '.' . $ext;
-                $destinationPath =  public_path('uploads/categories');
-                $img->move($destinationPath, $new_name);
-                $category->image = $new_name;
+            if(isset($request->image)){
+                if ($request->hasFile('image')) {
+                    $random_no  = uniqid();
+                    $img        = $request->file('image');
+                    $mime_type  =  $img->getMimeType();
+                    $ext        = $img->getClientOriginalExtension();
+                    $new_name   = $random_no . '.' . $ext;
+                    $destinationPath =  public_path('uploads/categories');
+                    $img->move($destinationPath, $new_name);
+                    $category->image = $new_name;
+                }
             }
             $category->save();
             return redirect('admin/category')->with('success_message', $message);
@@ -93,6 +93,9 @@ class CategoryController extends Controller
     {    
         $subcategory = Subcategory::select('subcategories.*','category.name as cat_name')  
                         ->join('category', 'category.id', '=', 'subcategories.cat_id')
+                        ->orderBy('id','desc')
+                        ->where('subcategories.status', 'Active')
+                        ->whereNull('subcategories.deleted_at')
                         ->get();
         return view('admin::category.subcat_index')->with(compact('subcategory'));
     }
@@ -100,7 +103,7 @@ class CategoryController extends Controller
      // Add Subcategory
     public function subCategory(Request $request, $id="")
     {
-        $get_parent_category = Categories::where('status', 'Active')->get();
+        $get_parent_category = Categories::where('status', 'Active')->whereNull('deleted_at')->get();
         if($id==""){
             $title = "Add Sub Category";
             $subcategory = new Subcategory;
@@ -115,11 +118,14 @@ class CategoryController extends Controller
             // echo "<pre>"; print_r($data); die;
 
             $rules = [
-                'name' => 'required',
+                'name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255',
+                'parent_id' => 'required',
             ];
 
             $customMessages = [
                 'name.required' => 'Name is required',
+                'name.regex' => 'Valid name is required',
+                'parent_id.required' => 'Category is required',
             ];
 
             $validation = Validator::make($request->all(), $rules, $customMessages);
@@ -144,6 +150,9 @@ class CategoryController extends Controller
         $ChildCategory = ChildCategory::select('childcategories.*', 'subcategories.name as subcat_name', 'category.name as cat_name')
                          ->join('subcategories', 'subcategories.id', '=', 'childcategories.subcategories_id')
                          ->join('category', 'category.id', '=', 'childcategories.cat_id')
+                         ->orderBy('id', 'desc')
+                         ->where('childcategories.status', 'Active')
+                         ->whereNull('childcategories.deleted_at')
                          ->get();
         return view('admin::category.childcat_index')->with(compact('ChildCategory'));
     }
@@ -153,9 +162,9 @@ class CategoryController extends Controller
     public function addChildCategory(Request $request, $id="")
     {
         // $ChildCategory = ChildCategory::find($id);
-        $get_parent_category = Categories::where('status', 'Active')->get();
+        $get_parent_category = Categories::where('status', 'Active')->whereNull('deleted_at')->get();
         // $get_sub_category = Subcategory::where('status', 'Active')->whereIn('cat_id', [$ChildCategory->cat_id])->get();
-        $get_sub_category = Subcategory::where('status', 'Active')->get();
+        $get_sub_category = Subcategory::where('status', 'Active')->whereNull('deleted_at')->get();
         // $get_sub_category = Subcategory::select('subcategories.*', 'subcategories.name as subcat_name')
         // ->join('childcategories', 'childcategories.cat_id', '=', 'subcategories.cat_id')
         // ->get();
@@ -177,29 +186,24 @@ class CategoryController extends Controller
             // echo "<pre>"; print_r($data); die;
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required';
+                $req_fields['name']      = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
                 $req_fields['parent_category'] = 'required';
-                $req_fields['subcategory_id'] = 'required';
+                $req_fields['subcategory_id']  =  'required';
             }
             else{
-                $req_fields['name']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
                 $req_fields['parent_category'] = 'required';
                 $req_fields['subcategory_id'] = 'required';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
+                'name.regex'    => 'Valid name is required',
                 'parent_category.required' => 'Parent Category is required',
                 'subcategory_id.required' => 'Sub Category is required',
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();
@@ -210,7 +214,6 @@ class CategoryController extends Controller
             $ChildCategory->cat_id = $data['parent_category'];
             $ChildCategory->subcategories_id = $data['subcategory_id'];
             $ChildCategory->save();
-            // dd($ChildCategory);
             return redirect('admin/childcategory')->with('success_message', $message);
         }
         return view('admin::category.addchildcat')->with(compact('title','ChildCategory', 'get_sub_category', 'get_parent_category'));

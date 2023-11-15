@@ -53,14 +53,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3 {{ $errors->has('color') ? 'has-danger' : '' }}">
+                                        <div class="form-group mb-3 {{ $errors->has('colorPicker') ? 'has-danger' : '' }}">
                                             <label for="colorPicker">Color</label>
                                             @if($colors['id'] !='')
                                                <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="{{ old('colorPicker', $colors['color_code'])}}">
                                             @else
                                                 <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="#ff0000">
                                             @endif
-                                            @error('color')
+                                            @error('colorPicker')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
                                             </div>

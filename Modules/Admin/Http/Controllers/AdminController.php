@@ -35,21 +35,9 @@ class AdminController extends Controller
 
             $customMessages = [
                 'email.required' => 'Email is required',
-                'email.email' => 'Valid email is required',
+                'email.email'    => 'Valid email is required',
                 'password.required' => 'Password is required',
             ];
-
-            // $validation = Validator::make($request->all(),
-            // $rules,
-            // [
-            //     'required' => 'The :attribute field is required.',
-            // ],
-            // $customMessages
-            // );
-
-            // if ($validation->fails()) {
-            //     return back()->withErrors($validation)->withInput();
-            // }
 
             $this->validate($request, $rules , $customMessages);
 
@@ -91,6 +79,7 @@ class AdminController extends Controller
         return view('admin.change_password');
     }
 
+    /* --- Check Current Password --- */
     public function CheckCurrentPassword(Request $request)
     {
         $data = $request->all();
@@ -101,6 +90,7 @@ class AdminController extends Controller
         }
     }
 
+    /* --- View Profile --- */
     public function ViewProfile()
     {
         return view('admin.view_Profile');
@@ -112,23 +102,27 @@ class AdminController extends Controller
             $data = $request->all();
 
             $rules = [
-                'name'  => 'required|max:255',
+                'name'  => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255',
                 'email' => 'required|email|max:255',
             ];
 
             $customMessages = [
                 'email.required' => 'Email is required',
-                'email.email' => 'Valid email is required',
+                'email.email'   => 'Valid email is required',
                 'name.required' => 'Name is required',
             ];
 
-            $this->validate($request, $rules , $customMessages);
+
+            $validation = Validator::make($request->all(), $rules, $customMessages);
+
+            if ($validation->fails()) {
+                return back()->withErrors($validation)->withInput();
+            }
+            // $this->validate($request, $rules , $customMessages);
 
             $admin_id = Auth::guard('admin')->user()->id;
             $admin = Admin::where('id', $admin_id)->first();
-            // dd($admin);
             if(!empty($admin)){
-                // return "hello";
                 $admin->name = $data['name'];
                 $admin->email = $data['email'];
                 $admin->save();

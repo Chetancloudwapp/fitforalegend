@@ -4,8 +4,8 @@ namespace App\Http\Controllers\front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Modules\Admin\Entities\Country;
+use App\Models\User;
 use Hash;
 use Auth;
 use Validator;
@@ -13,6 +13,7 @@ use Session;
 
 class UserLoginController extends Controller
 {
+    /* --- Home View --- */
      public function home(){
         // Session::put('page', 'Dashboard');
         return view('front.home');
@@ -23,6 +24,7 @@ class UserLoginController extends Controller
         return view('front.dashboard');
     }
 
+    /* --- Create Account ---*/
     public function register_user(Request $request)
     {
         $get_countries = Country::get();
@@ -30,9 +32,9 @@ class UserLoginController extends Controller
           
             $rules = [
                 'first_name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255', 
-                'last_name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255', 
-                'email' => 'required|email|unique:users',
-                'password' => 'required|max:30',
+                'last_name'  => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255', 
+                'email'      => 'required|email|unique:users',
+                'password'   => 'required|max:30',
                 'confirm_password' => 'required|same:password',
             ];
 
@@ -47,7 +49,12 @@ class UserLoginController extends Controller
                 'password.required' => 'Password is required',
             ];
 
-            $this->validate($request, $rules , $customMessages);
+            $validation = Validator::make($request->all(), $rules, $customMessages);
+
+            if ($validation->fails()) {
+                return back()->withErrors($validation)->withInput();
+            }
+            // $this->validate($request, $rules , $customMessages);
 
             $users = new User;
             $users->first_name = $request->first_name;
@@ -58,16 +65,8 @@ class UserLoginController extends Controller
             $users->mobile = $request->mobile;
             $users->gender = $request->gender;
             $users->save();
-            // dd($users);
             return redirect('web/user_login')->with('success_message', 'Account Created Successfully!');
-
-            // if(Auth::guard('admin')->attempt(['email'=>$data['email'], 'password'=> $data['password']])){
-            //     return redirect('admin/dashboard');
-            // }else{
-            //     return redirect()->back()->with("error_message", "Invalid Email or Password");
-            // }
         }
-        // return view('admin.login');
         return view('front.registerUser')->with(compact('get_countries'));
     }
 

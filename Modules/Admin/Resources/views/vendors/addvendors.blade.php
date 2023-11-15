@@ -67,13 +67,31 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <!--<input type="text" id="mobile_code" class="form-control" placeholder="Phone Number" name="name">-->
+                                            <div class="row">
+                                               <div class="col-2 pr-0"> 
+                                                    <select class="form-control" name="country_code" id="country_code">
+                                                    <option value="">+1</option>
+                                                        @foreach($get_countries as $value)
+                                                            <option value="{{ $value['phoneCode']}}">{{ $value['phoneCode']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                               </div>
+                                                <div class="col-16 pl-0">
+                                            <input placeholder="Enter your Phone number" class="form-control" name="mobile" type="text" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('country_code') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Country Code</label>
                                             <select class="form-control" name="country_code" id="country_code">
                                                 <option value="">Select Country Code</option>
                                                 @foreach($get_countries as $value)
                                                     <option value="{{ $value['phoneCode']}}" {{ $value['phoneCode'] == $vendors['country_code'] ? 'selected' : ''}}>{{ $value['phoneCode']}}</option>
-                                                   {{-- <option value="{{ $value['id']}}" {{ $value['id'] == $products['color'] ? 'selected' : ''}}>{{ $value['name']}}</option> --}}
+                                                   <option value="{{ $value['id']}}" {{ $value['id'] == $products['color'] ? 'selected' : ''}}>{{ $value['name']}}</option>
 
                                                 @endforeach
                                             </select>
@@ -97,7 +115,7 @@
                                             </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('email') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Email<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>

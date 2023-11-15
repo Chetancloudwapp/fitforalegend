@@ -48,7 +48,7 @@
                                 <tbody>
                                     @foreach($color as $key => $value)
                                         <tr>
-                                            <td>{{ $value['id'] }}</td>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['color_code'] }}</td>
                                             <td>

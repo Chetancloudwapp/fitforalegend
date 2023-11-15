@@ -48,7 +48,7 @@
                                 <tbody>
                                     @foreach($categories as $key => $category)
                                         <tr>
-                                            <td>{{ $category['id'] }}</td>
+                                            <td>{{ ++$key }}</td>
                                             <td><img class="tbl-img-css rounded-circle" width="50px"
                                                 src="{{ url('uploads/categories', $category['image']) }}">
                                             </td>

@@ -15,7 +15,7 @@ class SizeController extends Controller
     
     public function index()
     {
-        $size = MasterSize::get();
+        $size = MasterSize::whereNull('deleted_at')->orderBy('id','desc')->get();
         return view('admin::size.index')->with(compact('size'));
     }
 
