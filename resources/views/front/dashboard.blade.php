@@ -18,7 +18,7 @@
                             <li>
                                 <a href="javascript:;" class="list-group-item ">
                                 <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg" />
-                                <span class="pro-name">Hello <span class="dash-nm"> Jhon Doe </span></span> </a>
+                                <span class="pro-name">Hello <span class="dash-nm">{{ Auth::guard('web')->user()->first_name}} {{ Auth::guard('web')->user()->last_name}} </span></span> </a>
                             </li>
                         </ul>
                         <ul class="side-ulist side-ulist2">
@@ -64,27 +64,27 @@
                                         </div>
                                         <div class="col-md-6 ac-dtl mb-2">
                                             <label>First Name</label>
-                                            <h6>Jenny</h6>
+                                            <h6>{{ Auth::guard('web')->user()->first_name}}</h6>
                                         </div>
                                         <div class="col-md-6 ac-dtl mb-2">
                                             <label>Last Name</label>
-                                            <h6>Raider</h6>
+                                            <h6>{{ Auth::guard('web')->user()->last_name}}</h6>
                                         </div>
                                         <div class="col-md-6 ac-dtl mb-2">
                                             <label>Email Address</label>
-                                            <h6>jennyraider@hotmail.com</h6>
+                                            <h6>{{ Auth::guard('web')->user()->email}}</h6>
                                         </div>
                                         <div class="col-md-6 ac-dtl mb-2">
                                             <label>Gender</label>
-                                            <h6>Male</h6>
+                                            <h6>{{ Auth::guard('web')->user()->gender}}</h6>
                                         </div>
                                         <div class="col-md-6 ac-dtl mb-2">
                                             <label>Phone Number</label>
-                                            <h6> 876-432-4323</h6>
+                                            <h6>{{ Auth::guard('web')->user()->country_code}} {{ Auth::guard('web')->user()->mobile}}</h6>
                                         </div>
                                     </div>
                                     <div class="mt-2 clearfix clearfix2">
-                                        <a href="profile-edit.html" class="link-icn "><i class="icon-pencil"></i>Edit</a>
+                                        <a href="{{ route('web.editProfile')}}" class="link-icn "><i class="icon-pencil"></i>Edit</a>
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::get();
+        $products = Product::where('status', 'Active')->whereNull('deleted_at')->orderBy('id','desc')->get();
         return view('admin::product.index')->with(compact('products'));
     }
 

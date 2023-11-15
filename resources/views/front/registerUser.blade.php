@@ -66,6 +66,41 @@
                                 </div>
                             @enderror
 							</div>
+							<div class="col-sm-9">
+								<div class="form-group">
+									<select id="gender" name="gender" class="form-control stock">
+										<option value="">Select gender</option>
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										<option value="Transgender">Transgender</option>
+										<option value="Others">Others</option>
+										{{-- <option value="Female"
+										{{ $vendors['status'] == 'Deactive' ? 'selected' : '' }}>Deactive
+										</option> --}}
+									</select>
+								</div>
+                                @error('gender')
+                                <div class="col-form-alert-label">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+							</div>
+							{{-- <div class="col-md-6">
+								<div class="form-group mb-3 {{ $errors->has('status') ? 'has-danger' : '' }}">
+									<label class="col-form-label">Status</label>
+									<select id="status" name="status" class="form-control stock">
+										<option value="Active">Active</option>
+										<option value="Deactive"
+										{{ $vendors['status'] == 'Deactive' ? 'selected' : '' }}>Deactive
+										</option>
+									</select>
+									@error('status')
+									<div class="col-form-alert-label">
+										{{ $message }}
+									</div>
+									@enderror
+								</div>
+							</div> --}}
 						</div>
 						<div class="form-group">
 							<input type="password" name="password" class="form-control" placeholder="Password">
@@ -83,12 +118,28 @@
                             </div>
                         @enderror
 						</div>
+						<div class="form-group">
+							<!--<input type="text" id="mobile_code" class="form-control" placeholder="Phone Number" name="name">-->
+							<div class="row">
+							   <div class="col-2 pr-0"> 
+								    <select class="form-control" name="country_code" id="country_code">
+									<option value="">+1</option>
+										@foreach($get_countries as $value)
+											<option value="{{ $value['phoneCode']}}">{{ $value['phoneCode']}}</option>
+										@endforeach
+									</select>
+							   </div>
+								<div class="col-16 pl-0">
+							<input placeholder="Enter your Phone number" class="form-control" name="mobile" type="text" value="">
+							</div>
+							</div>
+						</div>
 						<div class="clearfix">
 							<input id="checkbox1" name="checkbox1" type="checkbox" checked="checked">
 							<label for="checkbox1">By registering your details you agree to our <a href="javascript:;" class="custom-color" >Terms and Conditions</a> and <a href="javascript:;" class="custom-color" >Cookie Policy</a></label>
 						</div>
 						<div class="text-center">
-							<button class="btn">create an account</button>
+							<button type="submit" class="btn">create an account</button>
 						</div>
                             <div class="clearfix text-center">
                             <label for="checkbox1">Already have an account ? <a href="{{ route('web.login')}}" class="custom-color" > Login here</label>

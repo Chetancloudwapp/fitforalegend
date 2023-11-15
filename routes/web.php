@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\front\DashboardController;
+use App\Http\Controllers\front\UserLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +28,14 @@ use App\Http\Controllers\front\DashboardController;
 // });
 
 Route::prefix('web')->group(function(){
-    Route::get('/', [DashboardController::class, 'home'])->name('web.home');
-    Route::match(['get','post'], '/register_user', [DashboardController::class, 'register_user'])->name('web.registerUser');
-    Route::match(['get','post'], '/user_login', [DashboardController::class, 'user_login'])->name('web.login');
-    Route::match(['get','post'], '/logout', [DashboardController::class, 'logout'])->name('web.logout');
+    Route::get('/', [UserLoginController::class, 'home'])->name('web.home');
+    Route::match(['get','post'], '/register_user', [UserLoginController::class, 'register_user'])->name('web.registerUser');
+    Route::match(['get','post'], '/user_login', [UserLoginController::class, 'user_login'])->name('web.login');
+    
+    Route::group(['middleware' => ['checkuser']], function(){
+        Route::get('/dashboard', [UserLoginController::class, 'dashboard'])->name('web.dashboard');
+        Route::match(['get','post'], '/logout', [UserLoginController::class, 'logout'])->name('web.logout');
+
+        Route::match(['get','post'], '/edit_profile', [UserLoginController::class, 'editProfile'])->name('web.editProfile');
+    });
 });
- Route::group(['middleware' => ['checkuser']], function(){
-     Route::get('dashboard', [DashboardController::class, 'dashboard']);
- });
