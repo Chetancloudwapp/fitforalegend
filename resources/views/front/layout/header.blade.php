@@ -4,6 +4,7 @@ use Modules\Admin\Entities\Categories;
 $categories = Categories::categories();
 // echo "<pre>"; print_r($categories); die;
 
+
 ?>
 <header class="hdr-wrap">
     <div class="hdr-content hdr-content-sticky">
@@ -61,19 +62,19 @@ $categories = Categories::categories();
                             </li>
                             {{-- <li><a href="category.html">Accessories</a></li> --}}
                             @foreach($categories as $category)
-                            @if(count($category)>0)
+                            @if(isset($category))
                             <li class="mmenu-item--mega">
-                                <a href="category.html">{{ $category['name']}}</a>
+                                <a href="javascript:;">{{ $category['name']}}</a>
                                 <div class="mmenu-submenu mmenu-submenu--has-bottom">
                                     <div class="mmenu-submenu-inside">
                                         <div class="container">
                                             <div class="mmenu-cols column-5">
                                                 @foreach($category['subcategories'] as $subcategory)
                                                 <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="category.html">{{ $subcategory['name']}}</a></h3>
+                                                    <h3 class="submenu-title"><a href="{{ route('productlisting')}}?category={{$category['id']}}&subcategory={{$subcategory['id']}}">{{ $subcategory['name']}}</a></h3>
                                                     <ul class="submenu-list">
                                                         @foreach($subcategory['childcategories'] as $childcategory)
-                                                        <li><a href="category.html">{{ $childcategory['name'] }}</a></li>
+                                                        <li><a href="{{ route('productlisting')}}?category={{$category['id']}}&subcategory={{$subcategory['id']}}&childcategory={{$childcategory['id']}}">{{ $childcategory['name'] }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </div>

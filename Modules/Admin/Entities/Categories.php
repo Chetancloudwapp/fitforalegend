@@ -23,6 +23,7 @@ class Categories extends Model
 
     public static function categories(){
         $get_categories = categories::with('subcategories', 'subcategories.childcategories')->where('status', 'Active')->get()->toArray();
+        // $get_categories = categories::with('subcategories', 'subcategories.childcategories')->where('status', 'Active')->get();
         return $get_categories;
     }
 
@@ -30,6 +31,9 @@ class Categories extends Model
         return $this->hasMany('Modules\Admin\Entities\Subcategory', 'cat_id')->where('status', 'Active');
     }
 
+    public function products(){
+        return $this->hasMany('Modules\Admin\Entities\Product', 'category')->with('brands')->where('status', 'Active');
+    }
     // public static function categories(){
     //     $getCategories = categories::with(['subcategories' => function($query){
     //         $query->with('subcategories');

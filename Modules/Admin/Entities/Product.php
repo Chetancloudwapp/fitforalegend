@@ -17,4 +17,9 @@ class Product extends Model
     {
         return \Modules\Admin\Database\factories\ProductFactory::new();
     }
+
+    public function brands(){
+        return $this->hasOne('Modules\Admin\Entities\MasterBrand', 'id','brand')->select('id', 'name')->where('status', 'Active');
+
+    }
 }
