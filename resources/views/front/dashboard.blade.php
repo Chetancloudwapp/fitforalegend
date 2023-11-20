@@ -4,7 +4,7 @@
     <div class="holder breadcrumbs-wrap mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="{{ route('web.home') }}">Home</a></li>
+                <li><a href="{{ route('home') }}">Home</a></li>
                 <li><span>My account</span></li>
             </ul>
         </div>
@@ -47,7 +47,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{{ route('web.logout')}}" class="list-group-item">
+                                <a href="{{ route('logout')}}" class="list-group-item">
                                 <i class="fa fa-sign-out mr-1" ></i> Logout</a>
                             </li>
                         </ul>
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-2 clearfix clearfix2">
-                                        <a href="{{ route('web.editProfile')}}" class="link-icn "><i class="icon-pencil"></i>Edit</a>
+                                        <a href="{{ route('editProfile')}}" class="link-icn "><i class="icon-pencil"></i>Edit</a>
                                     </div>
                                 </div>
                             </div>

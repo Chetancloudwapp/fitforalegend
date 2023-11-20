@@ -4,7 +4,7 @@
             <div class="row mt-0">
                 <div class="col-lg col-xl last-mobile">
                     <div class="footer-block">
-                        <div class="footer-logo"> <a href="index.html">
+                        <div class="footer-logo"> <a href="{{ route('home')}}">
                             <img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> 
                         </div>
                         <div class="collapsed-content">

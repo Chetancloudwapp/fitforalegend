@@ -16,31 +16,34 @@ use App\Http\Controllers\front\ProductsWebController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function(){
-//     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
-//     Route::group(['middleware' => ['admin']], function(){
-//         // Route::get('dashboard', [AdminController::class, 'dashboard']);
-//         // Route::get('logout', [AdminController::class, 'logout']);
-//     });
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
-Route::prefix('web')->group(function(){
-    Route::get('/', [UserLoginController::class, 'home'])->name('web.home');
-    Route::match(['get','post'], '/register_user', [UserLoginController::class, 'register_user'])->name('web.registerUser');
-    Route::match(['get','post'], '/user_login', [UserLoginController::class, 'user_login'])->name('web.login');
+
+// Route::prefix('web')->group(function(){
+    Route::get('/', [UserLoginController::class, 'home'])->name('home');
+    Route::match(['get','post'], '/register_user', [UserLoginController::class, 'register_user'])->name('registerUser');
+    Route::match(['get','post'], '/user_login', [UserLoginController::class, 'user_login'])->name('login');
+
+    // Products listing and detail routes
     Route::match(['get','post'], 'product_listing', [ProductsWebController::class, 'productListing'])->name('productlisting');
+    Route::match(['get','post'], '/product_detail/{id}', [ProductsWebController::class, 'productDetail'])->name('productDetail');
     
     // Middleware
     Route::group(['middleware' => ['checkuser']], function(){
-        Route::get('/dashboard', [UserLoginController::class, 'dashboard'])->name('web.dashboard');
-        Route::match(['get','post'], '/logout', [UserLoginController::class, 'logout'])->name('web.logout');
+        Route::get('/dashboard', [UserLoginController::class, 'dashboard'])->name('dashboard');
+        Route::match(['get','post'], '/logout', [UserLoginController::class, 'logout'])->name('logout');
 
-        Route::match(['get','post'], '/edit_profile', [UserLoginController::class, 'editProfile'])->name('web.editProfile');
+        Route::match(['get','post'], '/edit_profile', [UserLoginController::class, 'editProfile'])->name('editProfile');
 
         // Product Listing Routes
     });
+// });
+
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    echo 'Clear';
+    die();
 });

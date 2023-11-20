@@ -235,7 +235,7 @@
                                     <div class="prd prd--style2 prd-labels--max prd-labels-shadow ">
                                         <div class="prd-inside">
                                             <div class="prd-img-area">
-                                                <a href="product.html" class="prd-img image-hover-scale image-container">
+                                                <a href="{{ url('product_detail/'.$product['id'])}}" class="prd-img image-hover-scale image-container">
                                                     {{-- <img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" alt="Oversized Cotton Blouse" class="js-prd-img lazyload fade-up"> --}}
                                                     <img src = "{{ url('uploads/products', $product['featured_image'])}}">
                                                     <div class="foxic-loader"></div>
@@ -274,7 +274,7 @@
                                                     </div>
                                                     <div class="prd-rating justify-content-center"><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i></div>
                                                     <div class="prd-tag"><a href="#">{{ $product['brands']['name'] }}</a></div>
-                                                    <h2 class="prd-title"><a href="product.html">{{ $product['name']}}</a></h2>
+                                                    <h2 class="prd-title"><a href="{{ url('product_detail/'.$product['id'])}}">{{ $product['name']}}</a></h2>
                                                     <div class="prd-description"> Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia. </div>
                                                     <div class="prd-action">
                                                         <form action="#"> <button class="btn js-prd-addtocart" data-product='{"name": "Oversized Cotton Blouse", "path":"images/skins/fashion/products/product-03-1.webp", "url":"product.html", "aspect_ratio":0.778}'>Add To Cart</button> </form>

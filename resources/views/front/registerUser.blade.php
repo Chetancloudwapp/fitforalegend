@@ -4,7 +4,7 @@
 	<div class="holder breadcrumbs-wrap mt-0">
 	<div class="container">
 		<ul class="breadcrumbs">
-			<li><a href="{{ route('web.home')}}">Home</a></li>
+			<li><a href="{{ route('home')}}">Home</a></li>
 			<li><span>Create account</span></li>
 		</ul>
 	</div>
@@ -33,7 +33,7 @@
                             </button>
                         </div>
                     @endif
-					<form action="{{ route('web.registerUser')}}" method="post" enctype="multipart/form-data">
+					<form action="{{ route('registerUser')}}" method="post" enctype="multipart/form-data">
                         @csrf
 						<div class="row">
 							<div class="col-sm-9">
@@ -126,7 +126,7 @@
 							<button type="submit" class="btn">create an account</button>
 						</div>
                             <div class="clearfix text-center">
-                            <label for="checkbox1">Already have an account ? <a href="{{ route('web.login')}}" class="custom-color" > Login here</label>
+                            <label for="checkbox1">Already have an account ? <a href="{{ route('login')}}" class="custom-color" > Login here</label>
                         </div>
 					</form>
 				</div>

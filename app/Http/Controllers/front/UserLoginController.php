@@ -65,7 +65,7 @@ class UserLoginController extends Controller
             $users->mobile = $request->mobile;
             $users->gender = $request->gender;
             $users->save();
-            return redirect('web/user_login')->with('success_message', 'Account Created Successfully!');
+            return redirect('user_login')->with('success_message', 'Account Created Successfully!');
         }
         return view('front.registerUser')->with(compact('get_countries'));
     }
@@ -92,7 +92,7 @@ class UserLoginController extends Controller
             $this->validate($request, $rules , $customMessages);
 
             if(Auth::guard('web')->attempt(['email'=>$data['email'], 'password'=> $data['password']])){
-                return redirect('web/dashboard');
+                return redirect('dashboard');
             }else{
                 return redirect()->back()->with("error_message", "Invalid Email or Password");
             }
@@ -102,7 +102,7 @@ class UserLoginController extends Controller
 
     public function logout(){
         Auth::guard('web')->logout();
-        return redirect()->route('web.login');
+        return redirect()->route('login');
     }
 
     public function editProfile(Request $request)
@@ -131,7 +131,7 @@ class UserLoginController extends Controller
                     
             User::where('id', Auth::guard('web')->user()->id)->update(['first_name'=>$data['first_name'], 'last_name'=>$data['last_name'],'email'=>$data['email'], 'mobile'=>$data['mobile'],'country_code'=> $data['country_code']]);
 
-            return redirect('web/dashboard')->with('success_message', 'Profile Updated Successfully!');
+            return redirect('dashboard')->with('success_message', 'Profile Updated Successfully!');
         }
         return view('front.edit_profile')->with(compact('get_countries'));
     }

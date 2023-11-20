@@ -237,6 +237,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                        <div class="form-group mb-3 {{ $errors->has('short_description') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">Short Description</label>
+                                            <textarea
+                                               class="form-control summernote {{ $errors->has('short_description') ? 'form-control-danger' : ''}}"
+                                               name="short_description" type="message"
+                                                placeholder="Enter Short Description">{{ old('short_description',  $products['short_description']) }}</textarea>   
+                                               @error('short_description')
+                                                   <div class="col-form-alert-label">
+                                                    {{$message}}
+                                                   </div>
+                                                @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="form-group mb-3 {{ $errors->has('description') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Description</label>
                                             <textarea

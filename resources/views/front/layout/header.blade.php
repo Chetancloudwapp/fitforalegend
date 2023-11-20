@@ -4,7 +4,6 @@ use Modules\Admin\Entities\Categories;
 $categories = Categories::categories();
 // echo "<pre>"; print_r($categories); die;
 
-
 ?>
 <header class="hdr-wrap">
     <div class="hdr-content hdr-content-sticky">
@@ -31,7 +30,7 @@ $categories = Categories::categories();
                         </div>
                         <div class="hdr_container_desktop">
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                <a href="{{ route('web.registerUser') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
+                                <a href="{{ route('registerUser') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
                                 <span class="dropdn-link-txt ">Account</span></a> 
                             </div>
                         </div>
@@ -55,10 +54,10 @@ $categories = Categories::categories();
                     <div class="col-auto show-mobile">
                         <div class="menu-toggle"> <a href="#" class="mobilemenu-toggle"><i class="icon-menu"></i></a> </div>
                     </div>
-                    <div class="col-auto hdr-logo"> <a href="{{ route('web.home')}}" class="logo"><img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
+                    <div class="col-auto hdr-logo"> <a href="{{ route('home')}}" class="logo"><img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                         <ul class="mmenu mmenu-js">
-                            <li class="mmenu-item--simple"><a href="{{ route('web.home')}}" class="active">Home</a>
+                            <li class="mmenu-item--simple"><a href="{{ route('home')}}" class="active">Home</a>
                             </li>
                             {{-- <li><a href="category.html">Accessories</a></li> --}}
                             @foreach($categories as $category)
@@ -104,7 +103,7 @@ $categories = Categories::categories();
                             <div class="hdr_container_desktop">
                                 @guest
                                     <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                        <a href="{{ route('web.registerUser')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
+                                        <a href="{{ route('registerUser')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
                                         <span class="dropdn-link-txt ">Account</span></a> 
                                     </div>
                                 @endguest

@@ -96,6 +96,7 @@ class ProductController extends Controller
             $products->category = $data['parent_id'];
             $products->subcategory = $data['subcategory_id'];
             $products->childcategory = $data['childcategory_id'];
+            $products->short_description = $data['short_description'];
             $products->description = $data['description'];
             $products->specification_name = $data['specification_name'];
             $products->specification_description = $data['specification_description'];

@@ -4,7 +4,7 @@
     <div class="holder breadcrumbs-wrap mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="{{ route('web.dashboard')}}">Home</a></li>
+                <li><a href="{{ route('dashboard')}}">Home</a></li>
                 <li><span>Edit Profile</span></li>
             </ul>
         </div>
@@ -47,7 +47,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{{ route('web.logout')}}" class="list-group-item">
+                                <a href="{{ route('logout')}}" class="list-group-item">
                                 <i class="fa fa-sign-out mr-1" ></i> Logout</a>
                             </li>
                         </ul>
@@ -75,7 +75,7 @@
                                     </button>
                                   </div>
                                 @endif
-                                <form action="{{ route('web.editProfile')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('editProfile')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mt-2">
                                         <div class="col-sm-9">
