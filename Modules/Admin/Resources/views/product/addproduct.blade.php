@@ -288,7 +288,7 @@
                                             <label class="col-form-label">Gallery Images</label>
                                             <input type="file"
                                                 class="form-control {{ $errors->has('gallery_images') ? 'form-control-danger' : '' }}"
-                                                onchange="loadFile(event,'image_1')" name="gallery_images">
+                                                onchange="loadFile(event,'image_1')"  name="gallery_images[]" multiple>
                                             @error('gallery_images')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}

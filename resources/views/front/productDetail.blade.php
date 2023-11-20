@@ -19,7 +19,8 @@
 							<div class="prd-block_reviews" data-toggle="tooltip" data-placement="top" title="Scroll To Reviews"><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star"></i>
 								<span class="reviews-link"><a href="#" class="js-reviews-link"> (17 reviews)</a></span>
 							</div>
-							<h1 class="prd-block_title">Leather Pegged Pants</h1>
+							<h1 class="prd-block_title">{{ $product['name']}}</h1>
+							{{-- <h1 class="prd-block_title">{{ $get_categories['name']}}</h1> --}}
 						</div>
 					</div>
 				</div>

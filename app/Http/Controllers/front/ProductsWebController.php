@@ -15,10 +15,6 @@ class ProductsWebController extends Controller
         $request->category;
         $sub = $request->subcategory;
         $childcategory_id = $request->childcategory;
-        // return $sub;
-        // $request->category;
-        // $request->category;
-    
         if(isset($request->childcategory)){
             $get_categories = Categories::where('status', 'Active')->with(['products'=>function($query) use($childcategory_id){
                 // $query->where('subcategory',$sub);
@@ -32,11 +28,8 @@ class ProductsWebController extends Controller
             }])->get()->toArray();
         }
 
-        // if(isset($request->subcategory)){
-        // }
-
         // dd($get_categories);
-        return view('front.categories')->with(compact('get_categories'));
+        return view('front.productListing')->with(compact('get_categories'));
     }
 
     public function productDetail(Request $request, $id)

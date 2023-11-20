@@ -113,16 +113,26 @@ class ProductController extends Controller
                 $img->move($destinationPath, $new_name);
                 $products->featured_image = $new_name;
             }
+           
             if ($request->hasFile('gallery_images')) {
                 $random_no  = uniqid();
-                $img        = $request->file('gallery_images');
-                $mime_type  =  $img->getMimeType();
-                $ext        = $img->getClientOriginalExtension();
-                $new_name   = $random_no . '.' . $ext;
-                $destinationPath =  public_path('uploads/products');
-                $img->move($destinationPath, $new_name);
-                $products->gallery_images = $new_name;
+                $images   = $request->file('gallery_images');
+                $image_gallery = [];
+                foreach($images as $image){
+                    $mime_type  =  $image->getMimeType();
+                    $ext        =  $image->getClientOriginalExtension();
+                    $new_name   = $random_no . '.' . $ext;
+                    $destinationPath =  public_path('uploads/products');
+                    $image->move($destinationPath, $new_name);
+                    $image_gallery[]= $new_name;
+                    // dd($products);
+                }
+
+                // $image_gallery[]= $new_name;
+                // dd();
+               $products->gallery_images=json_encode($image_gallery);
             }
+
             $products->save();
             return redirect('admin/product')->with('success_message', $message);
         }

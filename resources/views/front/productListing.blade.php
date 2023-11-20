@@ -4,7 +4,7 @@
     <div class="holder breadcrumbs-wrap mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="home.html">Home</a></li>
+                <li><a href="{{ route('home')}}">Home</a></li>
                 <li><span>Category</span></li>
                 <!--<li class="d-block mt-2 page-title2">Men's Jeckets<span> - 125 items</span></li>-->
             </ul>
