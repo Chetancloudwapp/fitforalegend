@@ -64,13 +64,13 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($value['parent_id'] == 0)
-                                                     {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}"> <i class="fa-solid fa-plus"></i></a> --}}
-                                                     <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}" class="btn btn-primary btn-sm">Add Variation</a>
+                                                     <a title="Add Variation" href="{{ url('admin/variation/add/'.encrypt($value['id']))}}"> <i class="fa-solid fa-plus"></i></a>
+                                                     {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}" class="btn btn-primary btn-sm">Add Variation</a> --}}
                                                 @endif
                                                 {{-- <a href="{{ url('admin/product/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a> --}}
-                                                <a href="{{ url('admin/product/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
-                                                {{-- <a href="{{ url('admin/product/delete/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="product/delete" record_id="{{ encrypt($value['id'])}}" class="confirmDelete" name="product" title="Delete Product Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a title="Edit Product" href="{{ url('admin/product/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                {{-- <a href="{{ url('admin/add-images/'.$value['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
+                                                <a title="Delete Product" href="javascript:void(0)" record="product/delete" record_id="{{ encrypt($value['id'])}}" class="confirmDelete" name="product" title="Delete Product Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -38,7 +38,7 @@ Route::prefix('vendor')->group(function() {
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     $exitCode = Artisan::call('config:cache');
-    echo 'Clear';
+    echo '65';
     die();
 });
 

@@ -47,9 +47,12 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/product/delete/{id}', 'ProductController@deleteProduct');
         Route::post('get-subcategory', 'ProductController@getSubcategory');
         Route::post('get-childcategory', 'ProductController@getChildcategory');
-
+        
         // Variation
         Route::match(['get','post'], '/variation/add/{id}', 'ProductController@addVariation');
+        
+        // Add Multiple Images
+        // Route::match(['get','post'], '/add-images', 'ProductController@addImages');
         
         // Brands 
         Route::match(['get','post'], '/brands', 'BrandController@index');
@@ -80,7 +83,7 @@ Route::prefix('admin')->group(function() {
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     $exitCode = Artisan::call('config:cache');
-    echo 'Clear';
+    echo 'd';
     die();
 });
 

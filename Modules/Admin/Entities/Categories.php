@@ -32,7 +32,7 @@ class Categories extends Model
     }
 
     public function products(){
-        return $this->hasMany('Modules\Admin\Entities\Product', 'category')->with('brands')->where('status', 'Active');
+        return $this->hasMany('Modules\Admin\Entities\Product', 'category')->with('brands')->with('size')->where('status', 'Active');
     }
     // public static function categories(){
     //     $getCategories = categories::with(['subcategories' => function($query){

@@ -13,6 +13,7 @@ use Modules\Admin\Entities\ChildCategory;
 use Modules\Admin\Entities\MasterBrand;
 use Modules\Admin\Entities\MasterColor;
 use Modules\Admin\Entities\MasterSize;
+use Modules\Admin\Entities\ProductsImage;
 use Validator;
 use DB;
 
@@ -32,17 +33,19 @@ class ProductController extends Controller
     /* --- Add Product--- */
     public function addProduct(Request $request, $id='')
     {
-        
+        // dd($request->all());
         $get_parent_category = Categories::where('status', 'Active')->get();
         $get_sub_category = Subcategory::where('status', 'Active')->get();
         $get_child_category = ChildCategory::where('status', 'Active')->get();
         $get_brands = MasterBrand::where('status','Active')->whereNull('deleted_at')->get();
         $get_colors = MasterColor::where('status','Active')->whereNull('deleted_at')->get();
         $get_size = MasterSize::whereNull('deleted_at')->get();
+        $get_images = ProductsImage::whereNull('deleted_at')->get();
+        // dd($get_images);
         if($id ==""){
             // Add Product
             $title = "Add Product";
-            $products = new Product;
+            $products = new Product();
             $message = "Product Added Successfully!";
         }else{
             $title = "Edit Product";
@@ -52,32 +55,35 @@ class ProductController extends Controller
         }
         if($request->isMethod('post')){
             $data = $request->all();
+            // dd($data);
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
             }
             else{
-                $req_fields['name']   = 'required';
-                $req_fields['selling_price'] = 'required';
-                $req_fields['cost_price'] = 'required';
+                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['selling_price'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+                $req_fields['cost_price'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
                 $req_fields['brand'] = 'required';
                 $req_fields['size'] = 'required';
+                $req_fields['color'] = 'required';
+                $req_fields['parent_id'] = 'required';
+                $req_fields['subcategory_id'] = 'required';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
-                'selling_price.required' => 'Selling is required',
-                'cost_price.required' => 'Image is required',
-                'brand.required' => 'Image is required'
+                'name.regex'   => 'Valid name is required',
+                'selling_price.required' => 'Selling price is required',
+                'cost_price.required' => 'Cost Price is required',
+                'brand.required' => 'Brand field is required',
+                'size.required' => 'size is required',
+                'color.required' => 'Color is required',
+                'parent_id.required'=> 'Category is required',
+                'subcategory_id.required'=> 'Sub Category is required',
             ];
 
-            $validation = Validator::make($request->all(),
-                $req_fields,
-                [
-                    'required' => 'The :attribute field is required.',
-                ],
-                $customMessages
-            );
+            $validation = Validator::make($request->all(), $req_fields, $customMessages);
 
             if ($validation->fails()) {
                 return back()->withErrors($validation)->withInput();
@@ -111,37 +117,37 @@ class ProductController extends Controller
                 $new_name   = $random_no . '.' . $ext;
                 $destinationPath =  public_path('uploads/products');
                 $img->move($destinationPath, $new_name);
-                $products->featured_image = $new_name;
+                $products->featured_image = $new_name;   
             }
-           
-            if ($request->hasFile('gallery_images')) {
-                $random_no  = uniqid();
-                $images   = $request->file('gallery_images');
-                $image_gallery = [];
-                foreach($images as $image){
+            $products->save();
+            
+            /*--- Add gallery Images ---*/
+            if ($request->hasFile('images')) {
+               
+                $images   = $request->file('images');
+                // echo "<pre>"; print_r($images); die;
+                foreach($images as $key => $image){
+                    $random_no  = uniqid();
+                    $product_image = new ProductsImage();
+                    $product_image->product_id = $products->id;
+                    // dd($products);
                     $mime_type  =  $image->getMimeType();
                     $ext        =  $image->getClientOriginalExtension();
                     $new_name   = $random_no . '.' . $ext;
-                    $destinationPath =  public_path('uploads/products');
+                    $destinationPath =  public_path('uploads/products/galleryImages');
                     $image->move($destinationPath, $new_name);
-                    $image_gallery[]= $new_name;
-                    // dd($products);
+                    $product_image->image = $new_name;
+                    $product_image->save();
                 }
-
-                // $image_gallery[]= $new_name;
-                // dd();
-               $products->gallery_images=json_encode($image_gallery);
+               //  $products->gallery_images=json_encode($image_gallery);
             }
 
-            $products->save();
             return redirect('admin/product')->with('success_message', $message);
         }
-        return view('admin::product.addproduct')->with(compact('title','products', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors', 'get_size'));
+        return view('admin::product.addproduct')->with(compact('title','products', 'get_images', 'get_parent_category', 'get_sub_category','get_child_category','get_brands', 'get_colors', 'get_size'));
     }
 
-
     /* ---Get Subcategories Dropdown--- */
-
     public function getSubcategory(Request $request) {
         $categoryId = $request->input('category_id');
         $subcategories = Subcategory::where('cat_id', $categoryId)->pluck('name', 'id');

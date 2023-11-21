@@ -284,12 +284,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3 {{ $errors->has('gallery_images') ? 'has-danger' : '' }}">
+                                        <div class="form-group mb-3 {{ $errors->has('images') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Gallery Images</label>
                                             <input type="file"
-                                                class="form-control {{ $errors->has('gallery_images') ? 'form-control-danger' : '' }}"
-                                                onchange="loadFile(event,'image_1')"  name="gallery_images[]" multiple>
-                                            @error('gallery_images')
+                                                class="form-control {{ $errors->has('images') ? 'form-control-danger' : '' }}"
+                                                onchange="loadFile(event,'image_1')"  name="images[]" multiple="" id="images">
+                                            @error('images')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
                                             </div>
@@ -297,8 +297,12 @@
                                         </div>
                                         <div class="media-left">
                                             <a href="#" class="profile-image">
-                                            <img class="user-img img-css" id="image_1"
-                                                src="{{ $products['gallery_images'] != '' ? url('uploads/products', $products['gallery_images']) : asset('assets/upload//placeholder.png') }}">
+                                                @foreach($get_images as $value)
+                                                 @if($value['product_id'] == $products['id'])
+                                                    <img class="user-img img-css" id="image_1"
+                                                        src="{{ $value['image'] != '' ? url('uploads/products/galleryImages', $value['image']) : asset('assets/upload//placeholder.png') }}">
+                                                  @endif      
+                                                @endforeach
                                             </a>
                                         </div>
                                     </div>

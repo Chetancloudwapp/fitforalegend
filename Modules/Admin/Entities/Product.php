@@ -20,6 +20,13 @@ class Product extends Model
 
     public function brands(){
         return $this->hasOne('Modules\Admin\Entities\MasterBrand', 'id','brand')->select('id', 'name')->where('status', 'Active');
+    }
 
+    public function size(){
+        return $this->hasMany('Modules\Admin\Entities\MasterSize', 'id', 'size')->select('id', 'name');
+    }
+
+    public function images(){
+        return $this->hasMany('Modules\Admin\Entities\ProductsImage');
     }
 }

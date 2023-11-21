@@ -37,94 +37,31 @@
 				<div class="col-md-8 col-lg-8 col-xl-8 aside--sticky js-sticky-collision">
 					<div class="aside-content">
 						<div class="mb-2 js-prd-m-holder"></div>
-						{{-- main image start here --}}
 						<div class="prd-block_main-image">
 							<div class="prd-block_main-image-holder" id="prdMainImage">
 								<div class="product-main-carousel js-product-main-carousel" data-zoom-position="inner">
-									<div data-value="Beige">
-										<span class="prd-img">
-										<img src="{{ url('uploads/products', $product['featured_image'])}}" class="lazyload fade-up elzoom" alt=""/> 
-										{{-- data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-01.webp"/> --}}
-										</span>
+									<div data-value="Beige"><span class="prd-img"><img src="{{ $product['featured_image'] != '' ? url('uploads/products/', $product['featured_image']) : asset('assets/upload//placeholder.png') }}" data-src="{{ $product['featured_image'] != '' ? url('uploads/products/',  $product['featured_image']) : asset('assets/upload//placeholder.png') }}" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp"/></span>
 									</div>
-									{{-- <div data-value="Beige"><span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp"/></span>
-									</div> --}}
-									{{-- <div class="inner-video js-inner-video">
-										<video preload="metadata" controls="controls" playsinline="playsinline">
-											<source src="images/skins/fashion/product-page/product-video.mp4" type="video/mp4">
-										</video>
-									</div> --}}
-									{{-- <div data-value="Beige"><span class="prd-img">
-										<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-03.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-03.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-03.webp"/></span>
-									</div> --}}
-									{{-- <div data-value="Black"><span class="prd-img">
-										<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-04.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-04.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-04.webp"/></span>
-									</div> --}}
-									{{-- <div data-value="Black">
-										<span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-05.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-05.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-05.webp"/></span>
+									@foreach($get_images as $value)
+									<div data-value="Beige"><span class="prd-img"><img src="{{ $value['image'] != '' ? url('uploads/products/galleryImages', $value['image']) : asset('assets/upload//placeholder.png') }}" data-src="{{ $value['image'] != '' ? url('uploads/products/galleryImages', $value['image']) : asset('assets/upload//placeholder.png') }}" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp"/></span>
 									</div>
-									<div data-value="Black"><span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-06.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-06.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-06.webp"/></span>
-									</div>
-									<div data-value="Red"><span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-07.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-07.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-07.webp"/></span>
-									</div>
-									<div data-value="Red"><span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-08.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-08.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-08.webp"/></span>
-									</div>
-									<div data-value="Red"><span class="prd-img"><img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-09.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-09.webp" class="lazyload fade-up elzoom" alt="" data-zoom-image="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-09.webp"/></span>
-									</div> --}}
+									@endforeach
 								</div>
 								<div class="prd-block_label-sale-squared justify-content-center align-items-center"><span>In Stock</span></div>
 							</div>
 						</div>
 						<div class="product-previews-wrapper">
-							{{-- gallery image start here --}}
 							<div class="product-previews-carousel js-product-previews-carousel">
 								<a href="#" data-value="Beige">
-								<span class="prd-img">
-									{{-- url('uploads/products', $product['featured_image']) --}}
-								<img src="{{ url('uploads/products', $product['gallery_images'])}}" class="lazyload fade-up" alt=""/></span>
+									<span class="prd-img">
+									<img src="{{ $product['featured_image'] != '' ? url('uploads/products/', $product['featured_image']) : asset('assets/upload//placeholder.png') }}" data-src="{{  $product['featured_image'] != '' ? url('uploads/products/',  $product['featured_image']) : asset('assets/upload//placeholder.png') }}" alt=""/></span>
 								</a>
-								{{-- <a href="#" data-value="Beige">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-02.webp" class="lazyload fade-up" alt=""/>
-								</span>
-								</a>
-								<a href="#" class="prd-block_video-link video-slide">
-								<span><span><i class="icon icon-play"></i>
-								<img src="images/skins/fashion/product-page/product-video.html" alt=""/></span></span>
-								</a>
+								@foreach($get_images as $value)
 								<a href="#" data-value="Beige">
 								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-03.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-03.webp" class="lazyload fade-up" alt=""/>
-								</span>
+								<img src="{{ $value['image'] != '' ? url('uploads/products/galleryImages', $value['image']) : asset('assets/upload//placeholder.png') }}" data-src="{{ $value['image'] != '' ? url('uploads/products/galleryImages', $value['image']) : asset('assets/upload//placeholder.png') }}" class="lazyload fade-up" alt=""/></span>
 								</a>
-								<a href="#" data-value="Black">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-04.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-04.webp" class="lazyload fade-up" alt=""/>
-								</span>
-								</a>
-								<a href="#" data-value="Black">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-05.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-05.webp" class="lazyload fade-up" alt=""/>
-								</span>
-								</a>
-								<a href="#" data-value="Black">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-06.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-06.webp" class="lazyload fade-up" alt=""/>
-								</span></a> --}}
-								<!-- <a href="#" data-value="Red">
-									<span class="prd-img">
-										<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-07.webp" data-src="images/skins/fashion/product-page/product-07.webp" class="lazyload fade-up" alt=""/>
-									</span>
-									</a> -->
-								{{-- <a href="#" data-value="Red">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-08.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-08.webp" class="lazyload fade-up" alt=""/></span>
-								</a>
-								<a href="#" data-value="Red">
-								<span class="prd-img">
-								<img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-09.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/product-page/product-09.webp" class="lazyload fade-up" alt=""/>
-								</span>
-								</a> --}}
+								@endforeach
 							</div>
 						</div>
 					</div>
@@ -159,7 +96,7 @@
 										</select>
 										<ul class="images-list js-size-list" data-select-id="SingleOptionSelector-0">
 											<li class="active">
-												<a href="#" data-value="Beige" data-toggle="tooltip" data-placement="top" data-original-title="Beige"><span class="image-container image-container--product"><img src="{{ url('uploads/products', $product['featured_image']) }}" alt=""></span></a>
+												{{-- <a href="#" data-value="Beige" data-toggle="tooltip" data-placement="top" data-original-title="Beige"><span class="image-container image-container--product"><img src="{{ url('uploads/products', $product['featured_image']) }}" alt=""></span></a> --}}
 											<li>
 											<li>
 												<a href="#" data-value="Black" data-toggle="tooltip" data-placement="top" data-original-title="Black"><span class="image-container image-container--product"><img src="images/skins/fashion/product-page/product-04.html" alt=""></span></a>
@@ -176,23 +113,26 @@
 											<option value="Medium">Medium</option>
 											<option value="Large">Large</option>
 										</select>
-										<ul class="size-list js-size-list" data-select-id="SingleOptionSelector-1">
+										{{-- <ul class="size-list js-size-list" data-select-id="SingleOptionSelector-1">
 											<li class="active"><a href="#" data-value="Small"><span class="value">Small</span></a></li>
 											<li><a href="#" data-value="Medium"><span class="value">Medium</span></a></li>
 											<li><a href="#" data-value="Large"><span class="value">Large</span></a></li>
-										</ul>
+										</ul> --}}
 									</div>
 								</div>
 								<div class="prd-block_actions prd-block_actions--wishlist">
-									<!-- <div class="prd-block_qty">
+									 <div class="prd-block_qty">
+										<div class="option-label">Quantity:</div>
 										<div class="qty qty-changer">
 											<button class="decrease js-qty-button"></button>
 											<input type="number" class="qty-input" name="quantity" value="1" data-min="1" data-max="1000">
 											<button class="increase js-qty-button"></button>
 										</div>
-										</div> -->
+									</div> 
+								</div>
+								<div class="prd-block_actions prd-block_actions--wishlist">
 									<div class="btn-wrap">
-										<a href="cart.html" class="btn btn--add-to-cart btn--sm js-trigger-addtocart js-prd-addtocart"><span>Add to cart</span></a>
+										<a href="{{ route('addToCart')}}" class="btn btn--add-to-cart btn--sm js-trigger-addtocart js-prd-addtocart"><span>Add to cart</span></a>
 										<!-- <a href="cart.html">
 											<button class="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart"  data-src="cart.html">Add to cart</button>
 											</a> -->
