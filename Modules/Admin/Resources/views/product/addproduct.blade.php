@@ -135,7 +135,7 @@
                                             <input
                                                 class="form-control {{ $errors->has('quantity') ? 'form-control-danger' : '' }}"
                                                 name="quantity" type="text"
-                                                value="{{ old('quantity', $products['quantity']) }}" placeholder="Enter Price">      
+                                                value="{{ old('quantity', $products['quantity']) }}" placeholder="Enter Quantity">      
                                             @error('quantity')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}

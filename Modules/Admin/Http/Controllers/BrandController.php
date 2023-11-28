@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\MasterBrand;
 use Validator;
 use DB;
+use Image;
 
 class BrandController extends Controller
 {
@@ -61,19 +62,34 @@ class BrandController extends Controller
                 return back()->withErrors($validation)->withInput();
             }
 
+
+            if($request->hasFile('image')){
+                $image_tmp = $request->file('image');
+                if($image_tmp->isValid()){
+                    // Get Image Extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // Generate new Image Name
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $image_path = 'uploads/brands/'.$imageName;
+                    Image::make($image_tmp)->save($image_path);
+                }
+            }
+            $brands->image = $imageName;
             $brands->name = $data['name'];          
             $brands->status = $data['status'];
-            if ($request->hasFile('image')) {
-                $random_no  = uniqid();
-                $img        = $request->file('image');
-                $mime_type  =  $img->getMimeType();
-                $ext        = $img->getClientOriginalExtension();
-                $new_name   = $random_no . '.' . $ext;
-                $destinationPath =  public_path('uploads/brands');
-                $img->move($destinationPath, $new_name);
-                $brands->image = $new_name;
-            }
+
+            // if ($request->hasFile('image')) {
+            //     $random_no  = uniqid();
+            //     $img        = $request->file('image');
+            //     $mime_type  =  $img->getMimeType();
+            //     $ext        = $img->getClientOriginalExtension();
+            //     $new_name   = $random_no . '.' . $ext;
+            //     $destinationPath =  public_path('uploads/brands');
+            //     $img->move($destinationPath, $new_name);
+            //     $brands->image = $new_name;
+            // }
             $brands->save();
+            // echo "<pre>"; print_r($brands); die;
             return redirect('admin/brands')->with('success_message', $message);
         }
         return view('admin::brands.addbrand')->with(compact('title','brands'));
