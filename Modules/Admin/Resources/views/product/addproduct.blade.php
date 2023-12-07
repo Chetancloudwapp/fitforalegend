@@ -168,8 +168,13 @@
                                             <label class="col-form-label">Quantity</label>
                                             <input
                                                 class="form-control {{ $errors->has('quantity') ? 'form-control-danger' : '' }}"
+<<<<<<< HEAD
                                                 name="quantity" type="number" @if(!empty($products['quantity'])) value="{{ $products['quantity'] }}" @endif
                                                placeholder="Enter Quantity">      
+=======
+                                                name="quantity" type="text"
+                                                value="{{ old('quantity', $products['quantity']) }}" placeholder="Enter Quantity">      
+>>>>>>> 13098afbcd40b8e1ef41927f00b21bcf35095171
                                             @error('quantity')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
