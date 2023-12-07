@@ -119,13 +119,20 @@ $get_child_categories = Categories::where('status', 'Active')->where('id','=', 3
                                     <div class="prd-img-area">
                                         <a href="{{ url('product_detail/'.$product['id'])}}" class="prd-img image-hover-scale image-container">
                                             {{-- <img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" alt="Oversized Cotton Blouse" class="js-prd-img lazyload fade-up"> --}}
-                                            <img src = "{{ url('uploads/products', $product['featured_image'])}}">
+                                            <img src = "{{ asset('uploads/products/featuredImages/medium/'. $product['featured_image'])}}">
                                         
                                             <div class="foxic-loader"></div>
                                             <div class="prd-big-squared-labels">
                                                 <div class="label-new"><span>New</span></div>
                                                 <div class="label-sale">
-                                                    <span>-10% <span class="sale-text">Sale</span></span>
+                                                    @php
+                                                       $final_price = (($product['cost_price']- $product['selling_price'])/ $product['cost_price']) * 100;
+                                                    @endphp
+                                                    @if($final_price !='')
+                                                      <span>{{ sprintf("%.2f", $final_price) }}%<span class="sale-text">Sale</span></span>
+                                                    @else
+                                                      <span>{{ $product['selling_price'] }}%<span class="sale-text">Sale</span></span>
+                                                    @endif
                                                     <div class="countdown-circle">
                                                         <div class="countdown js-countdown" data-countdown="2021/07/01"></div>
                                                     </div>
@@ -203,12 +210,19 @@ $get_child_categories = Categories::where('status', 'Active')->where('id','=', 3
                             <div class="prd-img-area">
                                 <a href="{{ url('product_detail/'.$product['id'])}}" class="prd-img image-hover-scale image-container">
                                     {{-- <img src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" data-src="https://big-skins.com/frontend/foxic-html-demo/images/skins/fashion/products/product-01-3.webp" alt="Oversized Cotton Blouse" class="js-prd-img lazyload fade-up"> --}}
-                                    <img src = "{{ url('uploads/products', $product['featured_image'])}}">
+                                    <img src = "{{ asset('uploads/products/featuredImages/medium/'. $product['featured_image'])}}">
                                     <div class="foxic-loader"></div>
                                     <div class="prd-big-squared-labels">
                                         <div class="label-new"><span>New</span></div>
                                         <div class="label-sale">
-                                            <span>-10% <span class="sale-text">Sale</span></span>
+                                            @php
+                                                $final_price = (($product['cost_price']- $product['selling_price'])/ $product['cost_price']) * 100;
+                                            @endphp
+                                            @if($final_price !='')
+                                                <span>{{ sprintf("%.2f", $final_price) }}%<span class="sale-text">Sale</span></span>
+                                            @else
+                                            <span>{{ $product['selling_price'] }}%<span class="sale-text">Sale</span></span>
+                                            @endif
                                             <div class="countdown-circle">
                                                 <div class="countdown js-countdown" data-countdown="2021/07/01"></div>
                                             </div>
@@ -285,13 +299,20 @@ $get_child_categories = Categories::where('status', 'Active')->where('id','=', 3
                                 <div class="prd-inside">
                                     <div class="prd-img-area">
                                         <a href="{{ url('product_detail/'.$product['id'])}}" class="prd-img image-hover-scale image-container">
-                                            <img src = "{{ url('uploads/products', $product['featured_image'])}}">
+                                            <img src = "{{ asset('uploads/products/featuredImages/medium/'. $product['featured_image'])}}">
 
                                             <div class="foxic-loader"></div>
                                             <div class="prd-big-squared-labels">
                                                 <div class="label-new"><span>New</span></div>
                                                 <div class="label-sale">
-                                                    <span>-10% <span class="sale-text">Sale</span></span>
+                                                    @php
+                                                        $final_price = (($product['cost_price']- $product['selling_price'])/ $product['cost_price']) * 100;
+                                                    @endphp
+                                                    @if($final_price !='')
+                                                        <span>{{ sprintf("%.2f", $final_price) }}%<span class="sale-text">Sale</span></span>
+                                                    @else
+                                                        <span>{{ $product['selling_price'] }}%<span class="sale-text">Sale</span></span>
+                                                    @endif
                                                     <div class="countdown-circle">
                                                         <div class="countdown js-countdown" data-countdown="2021/07/01"></div>
                                                     </div>
@@ -352,9 +373,9 @@ $get_child_categories = Categories::where('status', 'Active')->where('id','=', 3
                                     <div class="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                                         <i class="icon-palette"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
                                         <ul>
-                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-grey.html')}}" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-green.html')}}" alt=""></a></li>
-                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ url('front/images/colorswatch/color-black.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-1.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ asset('front/images/colorswatch/color-grey.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-2.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ asset('front/images/colorswatch/color-green.html')}}" alt=""></a></li>
+                                            <li data-image="images/skins/fashion/products/product-06-color-3.webp"><a class="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="{{ asset('front/images/colorswatch/color-black.html')}}" alt=""></a></li>
                                         </ul>
                                     </div>
                                 </div>

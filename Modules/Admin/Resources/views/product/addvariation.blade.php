@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -36,15 +36,16 @@
                         <div class="card-body">
                             <form id="main" method="post" enctype="multipart/form-data">
                                 @csrf
+                                @foreach($product as $productData)
                                 <div class="row">
                                     <input type="hidden" name="id" value="{{$products['id']}}">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('name') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">{{('Name')}}<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
-                                            <input
+                                            <input value="{{ $productData['name']}}"
                                                 class="form-control {{ $errors->has('name') ? 'form-control-danger' : '' }}"
                                                 name="name" type="text"
-                                                value="{{ old('name', $products['name']) }}" placeholder="Enter name">      
+                                                placeholder="Enter name">  
                                             @error('name')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -103,10 +104,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('size') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Size<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
-                                            <input
-                                                class="form-control {{ $errors->has('size') ? 'form-control-danger' : '' }}"
-                                                name="size" type="text"
-                                                value="{{ old('size', $products['size']) }}" placeholder="Enter Size">      
+                                            <select class="form-control" id="size" name="size">
+                                                <option value="">Select Size</option>
+                                                @foreach($get_size as $value)
+                                                    <option value="{{ $value['id']}}" {{ $value['id'] == $products['size'] ? 'selected' : ''}}>{{ $value['name']}}</option>
+                                                @endforeach
+                                            </select>    
                                             @error('size')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -114,10 +117,27 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('color') ? 'has-danger' : '' }}">
                                             <label for="colorPicker">Color</label>
                                             <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="#ff0000">
+                                            @error('color')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3 {{ $errors->has('color') ? 'has-danger' : '' }}">
+                                            <label for="colorPicker">Color</label>
+                                            {{-- <input type="color" class="form-control" id="colorPicker" name="colorPicker" value="#ff0000"> --}}
+                                            <select class="form-control" id="color" name="color">
+                                                <option value="">Select Color</option>
+                                                @foreach($get_colors as $value)
+                                                   <option value="{{ $value['id']}}" {{ $value['id'] == $products['color'] ? 'selected' : ''}}>{{ $value['name']}}</option>
+                                                @endforeach
+                                            </select>
                                             @error('color')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -153,13 +173,72 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-6" style="display:none;">
+                                        <div class="form-group mb-3 {{ $errors->has('parent_id') ? 'has-danger' : '' }}"> 
+                                            <label class="col-form-label">Category*</label>
+                                            <select class="form-control {{ $errors->has('parent_id') ? 'form-control-danger' : '' }}" id="parent_id" name="parent_id">
+                                                <option value="{{ $productData['category'] }}">Select Category</option>
+                                                {{-- @foreach ($get_parent_category as $value)
+                                                    <option value="{{ $value['id'] }}" 
+                                                    {{ $value['id'] == $products['category'] ? 'selected' : '' }}>
+                                                        {{ $value['name'] }}
+                                                    </option>
+                                                @endforeach --}}
+                                            </select> 
+                                            @error('parent_id')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  style="display:none;">
+                                        <div class="form-group {{ $errors->has('subcategory_id') ? 'has-danger' : '' }}"> 
+                                            <label class="col-form-label">Sub Category*</label>
+                                            <select class="form-control {{ $errors->has('subcategory_id') ? 'form-control-danger' : ''}}" id="subcategory_id" name="subcategory_id"> 
+                                                <option value="{{ $productData['subcategory']}}">Select Sub Category</option>
+                                            </select> 
+                                            @error('subcategory_id')
+                                            <div class="col-form-alert-label">
+                                             {{$message}}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  style="display:none;">
+                                        <div class="form-group {{ $errors->has('childcategory_id') ? 'has-danger' : '' }}"> 
+                                            <label class="col-form-label">Child Category*</label>
+                                            <select class="form-control {{ $errors->has('childcategory_id') ? 'form-control-danger' : ''}}" id="childcategory_id" name="childcategory_id">
+                                                <option value="{{ $productData['childcategory']}}">Select Child Category</option>                     
+                                            </select> 
+                                            @error('childcategory_id')
+                                                <div class="col-form-alert-label">
+                                                {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3 {{ $errors->has('short_description') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">Short Description</label>
+                                            <textarea
+                                               class="form-control summernote {{ $errors->has('short_description') ? 'form-control-danger' : ''}}"
+                                               name="short_description" type="message"
+                                                placeholder="Enter Short Description">{{ $productData['short_description'] }}</textarea>   
+                                               @error('short_description')
+                                                   <div class="col-form-alert-label">
+                                                    {{$message}}
+                                                   </div>
+                                                @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3 {{ $errors->has('description') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Description</label>
                                             <textarea
                                                class="form-control summernote {{ $errors->has('description') ? 'form-control-danger' : ''}}"
                                                name="description" type="message"
-                                                placeholder="Enter Description">{{ old('description',  $products['description']) }}</textarea>   
+                                                placeholder="Enter Description">{{ $productData['description'] }}</textarea>   
                                                @error('description')
                                                    <div class="col-form-alert-label">
                                                     {{$message}}
@@ -173,6 +252,9 @@
                                             <input type="file"
                                                 class="form-control {{ $errors->has('featured_image') ? 'form-control-danger' : '' }}"
                                                 onchange="loadFile(event,'image_1')" name="featured_image">
+                                            @if(!empty($products['featured_image']))
+                                            <input type="hidden" name="current_image" value="{{ $products['featured_image'] }}">
+                                            @endif
                                             @error('featured_image')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -182,17 +264,17 @@
                                         <div class="media-left">
                                             <a href="#" class="profile-image">
                                             <img class="user-img img-css" id="image_1"
-                                                src="{{ $products['featured_image'] != '' ? url('uploads/products', $products['featured_image']) : asset('assets/upload//placeholder.png') }}">
+                                                src="{{ $products['featured_image'] != '' ? asset('uploads/products/'. $products['featured_image']) : asset('assets/upload//placeholder.png') }}">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3 {{ $errors->has('gallery_images') ? 'has-danger' : '' }}">
-                                            <label class="col-form-label">Gallery Images</label>
+                                        <div class="form-group mb-3 {{ $errors->has('images') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">Gallery Images : (Recommend Size: Less than 2 Mb)</label>
                                             <input type="file"
-                                                class="form-control {{ $errors->has('gallery_images') ? 'form-control-danger' : '' }}"
-                                                onchange="loadFile(event,'image_1')" name="gallery_images">
-                                            @error('gallery_images')
+                                                class="form-control {{ $errors->has('images') ? 'form-control-danger' : '' }}"
+                                                onchange="loadFile(event,'image_1')"  name="images[]" multiple="" id="images">
+                                            @error('images')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
                                             </div>
@@ -200,8 +282,21 @@
                                         </div>
                                         <div class="media-left">
                                             <a href="#" class="profile-image">
-                                            <img class="user-img img-css" id="image_1"
-                                                src="{{ $products['gallery_images'] != '' ? url('uploads/products', $products['gallery_images']) : asset('assets/upload//placeholder.png') }}">
+                                                <table cellpadding="4" cellspacing="4" border="1" style="margin:15px;">
+                                                <tr>
+                                                @foreach($products['images'] as $value)
+                                                    <td style="background-color: #f9f9f9;">
+                                                    @if($value['product_id'] == $products['id'])
+                                                        <a target="_blank" href="{{ asset('uploads/products/galleryImages/small/'. $value['image'])}}"><img src="{{ $value['image'] != '' ? asset('uploads/products/galleryImages/small/'. $value['image']) : asset('assets/upload//placeholder.png') }}" width="120px" class="user-img img-css" id="image_1">
+                                                        </a>&nbsp;
+                                                        <a href="javascript:void(0)" title="Delete Product" record="product/deleteImage" record_id="{{ $value['id']}}" 
+                                                        class="confirmDelete" name="product" title="Delete Product Image"> <i class="fa-solid fa-trash"></i> 
+                                                        </a>
+                                                    @endif  
+                                                    </td>    
+                                                @endforeach
+                                                </tr>
+                                                </table>
                                             </a>
                                         </div>
                                     </div>
@@ -211,7 +306,7 @@
                                             <input
                                                 class="form-control {{ $errors->has('specification_name') ? 'form-control-danger' : '' }}"
                                                 name="specification_name" type="text"
-                                                value="{{ old('specification_name', $products['specification_name']) }}" placeholder="Enter Specification Name">      
+                                                value="{{  $productData['specification_name'] }}" placeholder="Enter Specification Name">      
                                             @error('specification_name')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -225,7 +320,7 @@
                                             <textarea
                                                class="form-control summernote {{ $errors->has('specification_description') ? 'form-control-danger' : ''}}"
                                                name="specification_description" type="message"
-                                                placeholder="Enter Description">{{ old('specification_description',  $products['specification_description']) }}</textarea>   
+                                                placeholder="Enter Description">{{ $productData['specification_description'] }}</textarea>   
                                                @error('specification_description')
                                                    <div class="col-form-alert-label">
                                                     {{$message}}
@@ -239,7 +334,7 @@
                                             <input
                                                 class="form-control {{ $errors->has('meta_keywords') ? 'form-control-danger' : '' }}"
                                                 name="meta_keywords" type="text"
-                                                value="{{ old('meta_keywords', $products['meta_keywords']) }}" placeholder="Enter Meta Keywords">      
+                                                value="{{ $productData['meta_keywords'] }}" placeholder="Enter Meta Keywords">      
                                             @error('meta_keywords')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -253,7 +348,7 @@
                                             <textarea
                                                class="form-control summernote {{ $errors->has('meta_description') ? 'form-control-danger' : ''}}"
                                                name="meta_description" type="message"
-                                                placeholder="Enter Description">{{ old('meta_description',  $products['meta_description']) }}</textarea>   
+                                                placeholder="Enter Description">{{  $productData['meta_description'] }}</textarea>   
                                                @error('meta_description')
                                                    <div class="col-form-alert-label">
                                                     {{$message}}
@@ -278,6 +373,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                                 <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div>
                             </form>
                         </div>

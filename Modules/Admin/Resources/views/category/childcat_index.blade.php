@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -64,7 +64,7 @@
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
                                                 <a href="{{ url('admin/addchildcategory/'.$childcategory['id']) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/delete_childcategories/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="childcategories" record_id="{{ $childcategory['id'] }}" class="confirmDelete" name="childCategory" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a href="javascript:void(0)" record="childcategory/delete" record_id="{{ $childcategory['id'] }}" class="confirmDelete" name="childCategory" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -98,7 +98,9 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location.href = "/admin/delete_"+record+"/"+record_id;
+
+                root = "{{ config('app.url')}}"
+                window.location.href = root + "admin/"+record+"/"+record_id;
             }
             });
 

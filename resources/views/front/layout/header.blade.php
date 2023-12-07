@@ -13,7 +13,7 @@ $categories = Categories::categories();
                     <div class="menu-toggle"> <a href="#" class="mobilemenu-toggle"><i class="icon-menu"></i></a> </div>
                 </div>
                 <div class="col-auto hdr-logo"> <a href="index.html" class="logo">
-                    <img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> 
+                    <img srcset="{{ asset('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> 
                 </div>
                 <div class="hdr-nav hide-mobile nav-holder-s"> </div>
                 <div class="hdr-links-wrap col-auto ml-auto">
@@ -30,7 +30,7 @@ $categories = Categories::categories();
                         </div>
                         <div class="hdr_container_desktop">
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                <a href="{{ route('registerUser') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
+                                <a href="{{ route('dashboard') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
                                 <span class="dropdn-link-txt ">Account</span></a> 
                             </div>
                         </div>
@@ -39,7 +39,7 @@ $categories = Categories::categories();
                             <span class="dropdn-link-txt ">Wishlist</span></a> 
                         </div>
                         <div class="dropdn dropdn_account dropdn_fullheight"> 
-                            <a href="#" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
+                            <a href="{{ route('view_cart')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
                             <span class="dropdn-link-txt ">Cart</span></a> 
                         </div>
                     </div>
@@ -54,7 +54,7 @@ $categories = Categories::categories();
                     <div class="col-auto show-mobile">
                         <div class="menu-toggle"> <a href="#" class="mobilemenu-toggle"><i class="icon-menu"></i></a> </div>
                     </div>
-                    <div class="col-auto hdr-logo"> <a href="{{ route('home')}}" class="logo"><img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
+                    <div class="col-auto hdr-logo"> <a href="{{ route('home')}}" class="logo"><img srcset="{{ asset('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> </div>
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                         <ul class="mmenu mmenu-js">
                             <li class="mmenu-item--simple"><a href="{{ route('home')}}" class="active">Home</a>
@@ -101,19 +101,19 @@ $categories = Categories::categories();
                                 </div>
                             </div>
                             <div class="hdr_container_desktop">
-                                @guest
+                                {{-- @guest --}}
                                     <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                        <a href="{{ route('registerUser')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
+                                        <a href="{{ route('dashboard')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-user"></i>
                                         <span class="dropdn-link-txt ">Account</span></a> 
                                     </div>
-                                @endguest
+                                {{-- @endguest --}}
                             </div>
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
                                 <a href="account-wishlist.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-heart"></i>
                                 <span class="dropdn-link-txt ">Wishlist</span></a> 
                             </div>
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                <a href="cart.html" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
+                                <a href="{{ route('view_cart')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
                                 <span class="dropdn-link-txt ">Cart</span></a> 
                             </div>
                         </div>
@@ -311,10 +311,10 @@ $categories = Categories::categories();
                                 <a href="#" class="dropdn-link js-dropdn-link"><span class="js-dropdn-select-current">English</span><i class="icon-angle-down"></i></a>
                                 <div class="dropdn-content">
                                     <ul>
-                                        <li class="active"><a href="#"><img src="{{ url('front/images/flags/en.html')}}" alt="">English</a></li>
-                                        <li><a href="#"><img src="{{ url('front/images/flags/sp.html')}}" alt="">Spanish</a></li>
-                                        <li><a href="#"><img src="{{ url('front/images/flags/de.html')}}" alt="">German</a></li>
-                                        <li><a href="#"><img src="{{ url('front/images/flags/fr.html')}}" alt="">French</a></li>
+                                        <li class="active"><a href="#"><img src="{{ asset('front/images/flags/en.html')}}" alt="">English</a></li>
+                                        <li><a href="#"><img src="{{ asset('front/images/flags/sp.html')}}" alt="">Spanish</a></li>
+                                        <li><a href="#"><img src="{{ asset('front/images/flags/de.html')}}" alt="">German</a></li>
+                                        <li><a href="#"><img src="{{ asset('front/images/flags/fr.html')}}" alt="">French</a></li>
                                     </ul>
                                 </div>
                             </div>

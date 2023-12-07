@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -61,12 +61,29 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    {{-- <div class="col-md-6">
+                                        <div class="form-group mb-3 {{ $errors->has('slug') ? 'has-danger' : '' }}">
+                                            <label class="col-form-label">{{('Slug')}}</label>
+                                            <input
+                                                class="form-control {{ $errors->has('slug') ? 'form-control-danger' : '' }}"
+                                                name="slug" type="text"
+                                                value="{{ old('slug', $brands['slug']) }}" placeholder="Enter slug">      
+                                            @error('slug')
+                                            <div class="col-form-alert-label">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('image') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Image</label>
                                             <input type="file"
                                                 class="form-control {{ $errors->has('image') ? 'form-control-danger' : '' }}"
                                                 onchange="loadFile(event,'image_1')" name="image">
+                                            @if(!empty($brands['image']))
+                                             <input type="hidden" name="current_image" value="{{ $brands['image'] }}">
+                                            @endif
                                             @error('image')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -76,7 +93,7 @@
                                         <div class="media-left">
                                             <a href="#" class="profile-image">
                                             <img class="user-img img-css" id="image_1"
-                                                src="{{ $brands['image'] != '' ? url('uploads/brands', $brands['image']) : asset('assets/upload//placeholder.png') }}">
+                                                src="{{ $brands['image'] != '' ? asset('uploads/brands/'. $brands['image']) : asset('assets/upload//placeholder.png') }}">
                                             </a>
                                         </div>
                                     </div>

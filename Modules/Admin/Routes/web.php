@@ -27,18 +27,18 @@ Route::prefix('admin')->group(function() {
         // Categories
         Route::match(['get','post'], '/category', 'CategoryController@index');
         Route::match(['get','post'], '/addcategory/{id?}', 'CategoryController@addEditCategory');
-        Route::match(['get','post'], 'delete_categories/{id?}', 'CategoryController@destroy');
+        Route::match(['get','post'], '/category/delete/{id?}', 'CategoryController@destroy');
         
         // Add Subcategories
         Route::match(['get','post'], '/subcategory', 'CategoryController@subcategoryindex');
         Route::match(['get','post'], '/addsubcat/{id?}', 'CategoryController@subCategory');
-        Route::match(['get', 'post'], '/delete_subcategories/{id?}', 'CategoryController@delete_subcategories');
+        Route::match(['get', 'post'], '/subcategory/delete/{id?}', 'CategoryController@delete_subcategories');
         Route::post('get-subcategories', 'CategoryController@getSubcategories');
         
         // ChildCategories
         Route::match(['get','post'], '/childcategory', 'CategoryController@childcategoryindex');
         Route::match(['get','post'], '/addchildcategory/{id?}', 'CategoryController@addChildCategory');
-        Route::match(['get','post'], '/delete_childcategories/{id?}', 'CategoryController@delete_childcategories');
+        Route::match(['get','post'], '/childcategory/delete/{id?}', 'CategoryController@delete_childcategories');
         
         // Products
         Route::match(['get','post'], '/product', 'ProductController@index');
@@ -47,6 +47,7 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/product/delete/{id}', 'ProductController@deleteProduct');
         Route::post('get-subcategory', 'ProductController@getSubcategory');
         Route::post('get-childcategory', 'ProductController@getChildcategory');
+        Route::match(['get','post'], 'product/deleteImage/{id?}', 'ProductController@deleteProductImage');
         
         // Variation
         Route::match(['get','post'], '/variation/add/{id}', 'ProductController@addVariation');
@@ -78,13 +79,6 @@ Route::prefix('admin')->group(function() {
         Route::match(['get','post'], '/vendors/edit/{id}', 'VendorController@addVendors');
         Route::match(['get','post'], '/vendors/delete/{id}', 'VendorController@deletevendors');
     });
-});
-
-Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode = Artisan::call('config:cache');
-    echo 'd';
-    die();
 });
 
 

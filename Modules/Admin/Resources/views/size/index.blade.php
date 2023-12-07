@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -86,7 +86,8 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location.href = "/admin/"+record+"/"+record_id;
+                root = "{{ config('app.url')}}"
+                window.location.href = root + "admin/"+record+"/"+record_id;
             }
             });
 

@@ -18,7 +18,7 @@ class AdminController extends Controller
 
     /* --- view Dashboard --- */
     public function dashboard(){
-        return view('admin.dashboard');
+        return view('admin::admin.dashboard');
     }
 
     /* --- login View --- */
@@ -42,13 +42,23 @@ class AdminController extends Controller
             $this->validate($request, $rules , $customMessages);
 
             if(Auth::guard('admin')->attempt(['email'=>$data['email'], 'password'=> $data['password']])){
+
+                //  Remember Admin Email and password with Cookies
+                if(isset($data['remember']) &&!empty($data['remember'])){
+                    setcookie("email",$data['email'], time()+86400);
+                    // cookie set for one day
+                    setcookie("password",$data['password'],time()+86400);
+                }else{
+                    setcookie("email", "");
+                    setcookie("password","");
+                }
                 return redirect('admin/dashboard');
             }else{
                 // return back()->withErrors(['error' => "Invalid Username or Password!"]);
                 return redirect()->back()->with("error_message", "Invalid Email or Password");
             }
         }
-        return view('admin.login');
+        return view('admin::admin.login');
     }
 
     /* --- Admin logout --- */
@@ -76,7 +86,7 @@ class AdminController extends Controller
               return redirect()->back()->with('error_message', 'Your old password is Incorrect!');
            }
         }
-        return view('admin.change_password');
+        return view('admin::admin.change_password');
     }
 
     /* --- Check Current Password --- */
@@ -93,7 +103,7 @@ class AdminController extends Controller
     /* --- View Profile --- */
     public function ViewProfile()
     {
-        return view('admin.view_Profile');
+        return view('admin::admin.view_Profile');
     }
 
     public function EditProfile(Request $request)
@@ -132,6 +142,6 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.edit_profile');
+        return view('admin::admin.edit_profile');
     }
 }

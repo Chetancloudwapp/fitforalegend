@@ -5,7 +5,7 @@
                 <div class="col-lg col-xl last-mobile">
                     <div class="footer-block">
                         <div class="footer-logo"> <a href="{{ route('home')}}">
-                            <img srcset="{{ url('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> 
+                            <img srcset="{{ asset('front/images/skins/fashion/logo5.png')}}" alt="Logo" width="127px" height="100%"></a> 
                         </div>
                         <div class="collapsed-content">
                             <ul>
@@ -84,7 +84,7 @@
     <div class="sticky-addcart js-stickyAddToCart closed">
         <div class="container">
             <div class="row">
-                <div class="col-auto sticky-addcart_image"> <a href="product.html"> <img src="{{ url('front/images/skins/fashion/products/product-01-1.html')}}" alt="" /> </a> </div>
+                <div class="col-auto sticky-addcart_image"> <a href="product.html"> <img src="{{ asset('front/images/skins/fashion/products/product-01-1.html')}}" alt="" /> </a> </div>
                 <div class="col col-sm-5 col-lg-4 col-xl-5 sticky-addcart_info">
                     <h1 class="sticky-addcart_title">Leather Pegged Pants</h1>
                     <div class="sticky-addcart_price"> <span class="sticky-addcart_price--actual">$180.00</span> <span class="sticky-addcart_price--old">$210.00</span> </div>
@@ -114,7 +114,7 @@
                 <div class="col-auto popup-addedtocart_logo"> <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/logo-white-sm.webp" class="lazyload fade-up" alt=""> </div>
                 <div class="col popup-addedtocart_info">
                     <div class="row">
-                        <a href="product.html" class="col-auto popup-addedtocart_image"> <span class="image-container w-100"> <img src="{{ url('front/images/skins/fashion/products/product-01-1.html')}}" alt="" /> </span> </a>
+                        <a href="product.html" class="col-auto popup-addedtocart_image"> <span class="image-container w-100"> <img src="{{ asset('front/images/skins/fashion/products/product-01-1.html')}}" alt="" /> </span> </a>
                         <div class="col popup-addedtocart_text"> <a href="product.html" class="popup-addedtocart_title"></a> <span class="popup-addedtocart_message">Added to <a href="cart.html" class="underline">Cart</a></span> <span class="popup-addedtocart_error_message"></span> </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
         <div class="payment-notification payment-notification--squared">
             <div class="payment-notification-inside">
                 <div class="payment-notification-container">
-                    <a href="#" class="payment-notification-image js-pn-link"> <img src="{{ url('front/images/products/product-01.html')}}" class="js-pn-image" alt=""> </a>
+                    <a href="#" class="payment-notification-image js-pn-link"> <img src="{{ asset('front/images/products/product-01.html')}}" class="js-pn-image" alt=""> </a>
                     <div class="payment-notification-content-wrapper">
                         <div class="payment-notification-content">
                             <div class="payment-notification-text">Someone purchased</div>

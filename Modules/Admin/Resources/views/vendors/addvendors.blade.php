@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -34,7 +34,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form id="main" method="post" enctype="multipart/form-data">
+                            <form id="main" method="post" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <input type="hidden" name="id" value="{{$vendors['id']}}">
@@ -67,19 +67,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group mb-3">
                                             <!--<input type="text" id="mobile_code" class="form-control" placeholder="Phone Number" name="name">-->
+                                            <label class="col-form-label">Mobile Number<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
                                             <div class="row">
                                                <div class="col-2 pr-0"> 
                                                     <select class="form-control" name="country_code" id="country_code">
                                                     <option value="">+1</option>
                                                         @foreach($get_countries as $value)
-                                                            <option value="{{ $value['phoneCode']}}">{{ $value['phoneCode']}}</option>
+                                                            <option value="{{ $value['phoneCode']}}" {{ $value['phoneCode'] == $vendors['country_code'] ? 'selected' : ''}}>{{ $value['phoneCode']}}</option>
                                                         @endforeach
                                                     </select>
                                                </div>
                                                 <div class="col-16 pl-0">
-                                            <input placeholder="Enter your Phone number" class="form-control" name="mobile" type="text" value="">
+                                            <input placeholder="Enter your Phone number" value="{{ old('mobile', $vendors['mobile']) }}" class="form-control" name="mobile" type="text" value="">
                                             </div>
                                             </div>
                                         </div>
@@ -121,7 +122,7 @@
                                             <label class="col-form-label">Email<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
                                             <input
                                                 class="form-control {{ $errors->has('email') ? 'form-control-danger' : '' }}"
-                                                name="email" type="text"
+                                                name="email" type="text" autocomplete="off"
                                                 value="{{ old('email', $vendors['email']) }}" placeholder="Enter your email">      
                                             @error('email')
                                             <div class="col-form-alert-label">
@@ -130,12 +131,13 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    @if($vendors['id'] =='')
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('password') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Password<span class="mandatory cls" style="color:red; font-size:15px">*</span></label>
                                             <input
                                                 class="form-control {{ $errors->has('password') ? 'form-control-danger' : '' }}"
-                                                name="password" type="password"
+                                                name="password" type="password" autocomplete="off"
                                                 value="{{ old('password', $vendors['password']) }}" placeholder="Enter Password">      
                                             @error('password')
                                             <div class="col-form-alert-label">
@@ -143,7 +145,8 @@
                                             </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div>     
+                                    @endif
                                     <div class="col-md-6">
                                         <div class="form-group mb-3 {{ $errors->has('shop_name') ? 'has-danger' : '' }}">
                                             <label class="col-form-label">Shop Name</label>

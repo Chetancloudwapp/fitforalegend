@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -51,7 +51,7 @@
                                         <tr>
                                             <td>{{ ++$key }}</td>
                                             <td><img class="tbl-img-css rounded-circle" width="50px"
-                                                src="{{ url('uploads/products', $value['featured_image']) }}">
+                                                src="{{ asset('uploads/products/featuredImages/small/'. $value['featured_image']) }}">
                                             </td>
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['selling_price'] }}</td>
@@ -67,10 +67,14 @@
                                                      <a title="Add Variation" href="{{ url('admin/variation/add/'.encrypt($value['id']))}}"> <i class="fa-solid fa-plus"></i></a>
                                                      {{-- <a href="{{ url('admin/variation/add/'.encrypt($value['id']))}}" class="btn btn-primary btn-sm">Add Variation</a> --}}
                                                 @endif
-                                                {{-- <a href="{{ url('admin/product/edit/'.$value['id']) }}"> <i class="fa-solid fa-pencil"></i></a> --}}
-                                                <a title="Edit Product" href="{{ url('admin/product/edit/'.encrypt($value['id'])) }}"> <i class="fa-solid fa-pencil"></i></a>
+                                                @if($value['parent_id'] == 0)
+                                                <a title="Edit Product" href="{{ url('admin/product/edit/'.$value['id']) }}"><i class="fa-solid fa-pencil"></i>
+                                                </a>
+                                                @else
+                                                <a title="Edit Variation Product" href="{{ url('admin/variation/add/'.encrypt($value['parent_id'])) }}"><i class="fa-solid fa-pencil"></i>
+                                                @endif
                                                 {{-- <a href="{{ url('admin/add-images/'.$value['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a title="Delete Product" href="javascript:void(0)" record="product/delete" record_id="{{ encrypt($value['id'])}}" class="confirmDelete" name="product" title="Delete Product Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a title="Delete Product" href="javascript:void(0)" record="product/delete" record_id="{{ $value['id']}}" class="confirmDelete" name="product" title="Delete Product Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -104,8 +108,8 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                // window.location.href = "/admin/delete_"+record+"/"+record_id;
-                window.location.href = "/admin/"+record+"/"+record_id;
+                root = "{{ config('app.url')}}"
+                window.location.href = root + "admin/"+record+"/"+record_id;
             }
             });
 

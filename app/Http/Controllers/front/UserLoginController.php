@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Admin\Entities\Country;
 use App\Models\User;
+use App\Models\Cart;
 use Hash;
 use Auth;
 use Validator;
@@ -92,6 +93,30 @@ class UserLoginController extends Controller
             $this->validate($request, $rules , $customMessages);
 
             if(Auth::guard('web')->attempt(['email'=>$data['email'], 'password'=> $data['password']])){
+                if(Session::has('cart')){
+                    $cart = $request->session()->get('cart');
+                    $user_id = Auth::user()->id;
+                  
+                    // Save cart details to the database 
+                    foreach ($cart as $item) {
+                        $cartmodel = Cart::where('product_id', $item['product_id'])->where('user_id', $user_id)->first();
+                        if($cartmodel){
+                            $cartmodel->product_quantity += $item['product_quantity'];
+                            $cartmodel->save();
+                            $request->session()->flush();
+                        }else{
+                            Cart::create([
+                                'user_id' => auth()->id(),
+                                // dd(user_id),
+                                'product_id' => $item['product_id'],
+                                'product_size' => $item['product_size'],
+                                'product_quantity' => $item['product_quantity'],
+                            ]);
+                        }
+                    }
+                    $request->session()->flush();
+                    return redirect('view/cart');
+                }
                 return redirect('dashboard');
             }else{
                 return redirect()->back()->with("error_message", "Invalid Email or Password");

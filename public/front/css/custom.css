@@ -336,10 +336,10 @@ height: 100%;
     
     padding-bottom:97% !important;
 }
-body.equal-height .prd-img:not(.prd-img--noequal){
+/* body.equal-height .prd-img:not(.prd-img--noequal){
     
-     padding-bottom:200px !important;
-}
+     padding-bottom:297px !important;
+} */
 .card-body2{
     
     padding:0px;

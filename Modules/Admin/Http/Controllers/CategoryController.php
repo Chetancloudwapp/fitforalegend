@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,7 +12,7 @@ use Modules\Admin\Entities\ChildCategory;
 use Session;
 use Validator;
 use DB;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use Image;
 
 class CategoryController extends Controller
 {
@@ -46,16 +47,16 @@ class CategoryController extends Controller
 
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['name']   = 'required|regex:/^[^\d]+$/|min:2|max:255';
             }
             else{
-                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['name']   = 'required|unique:category|regex:/^[^\d]+$/|min:2|max:255';
                 $req_fields['image']  = 'mimes:jpeg,jpg,png,gif|required|max:10000';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
-                'name.regex'    => 'Valid name is required',
+                // 'name.regex'    => 'Valid name is required',
                 'image.required' => 'Image is required',
                 'image.mimes'   =>  'Valid image is required',
             ];
@@ -68,24 +69,45 @@ class CategoryController extends Controller
 
             // $this->validate($request, $rules, $customMessages);
 
+            // Upload Brands Image
+            if($request->hasFile('image')){
+            $image_tmp = $request->file('image');
+                if($image_tmp->isValid()){
+                    // Get Image Extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // Generate new Image Name
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $image_path = public_path('uploads/categories/'.$imageName);
+                    Image::make($image_tmp)->save($image_path);
+                }
+            }else if(!empty($data['current_image'])){
+                $imageName = $data['current_image'];
+            }else{
+                $imageName = "";
+            }
+
+            $category->image = $imageName;
             $category->name   = $data['name'];
             $category->status = $data['status'];
-            if(isset($request->image)){
-                if ($request->hasFile('image')) {
-                    $random_no  = uniqid();
-                    $img        = $request->file('image');
-                    $mime_type  =  $img->getMimeType();
-                    $ext        = $img->getClientOriginalExtension();
-                    $new_name   = $random_no . '.' . $ext;
-                    $destinationPath =  public_path('uploads/categories');
-                    $img->move($destinationPath, $new_name);
-                    $category->image = $new_name;
-                }
-            }
             $category->save();
             return redirect('admin/category')->with('success_message', $message);
         }
         return view('admin::category.addCategory')->with(compact('title','category'));
+    }
+
+    /* --- Delete Category--- */
+    public function destroy($id)
+    {
+        $category = Categories::findOrFail($id);
+        Subcategory::where('cat_id', $id)->delete();
+        ChildCategory::where('cat_id', $id)->delete();
+
+        $categories_image_path = public_path('uploads/categories/');
+        if(file_exists($categories_image_path.$category->image)){
+            unlink($categories_image_path.$products->image);
+        }
+        $category->delete();
+        return redirect()->back()->with('success_message', 'Category Deleted Successfully!');
     }
 
      // Subcategory Index
@@ -118,13 +140,13 @@ class CategoryController extends Controller
             // echo "<pre>"; print_r($data); die;
 
             $rules = [
-                'name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255',
+                'name' => 'required|unique:subcategories|regex:/^[^\d]+$/|min:2|max:255',
                 'parent_id' => 'required',
             ];
 
             $customMessages = [
                 'name.required' => 'Name is required',
-                'name.regex' => 'Valid name is required',
+                // 'name.regex' => 'Valid name is required',
                 'parent_id.required' => 'Category is required',
             ];
 
@@ -186,19 +208,19 @@ class CategoryController extends Controller
             // echo "<pre>"; print_r($data); die;
             $req_fields =  [];
             if($request->id !=''){
-                $req_fields['name']      = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['name']      = 'required|min:2|max:255';
                 $req_fields['parent_category'] = 'required';
                 $req_fields['subcategory_id']  =  'required';
             }
             else{
-                $req_fields['name']   = 'required|regex:/^[\pL\s\-]+$/u|min:3|max:255';
+                $req_fields['name']   = 'required|unique:childcategories|regex:/^[^\d]+$/|min:2|max:255';
                 $req_fields['parent_category'] = 'required';
                 $req_fields['subcategory_id'] = 'required';
             }
             
             $customMessages = [
                 'name.required' => 'Name is required',
-                'name.regex'    => 'Valid name is required',
+                'name.regex'    => 'The category name does not contain numbers',
                 'parent_category.required' => 'Parent Category is required',
                 'subcategory_id.required' => 'Sub Category is required',
             ];
@@ -217,16 +239,6 @@ class CategoryController extends Controller
             return redirect('admin/childcategory')->with('success_message', $message);
         }
         return view('admin::category.addchildcat')->with(compact('title','ChildCategory', 'get_sub_category', 'get_parent_category'));
-    }
-
-    /* --- Delete Category--- */
-    public function destroy($id)
-    {
-        $category = Categories::findOrFail($id);
-        Subcategory::where('cat_id', $id)->delete();
-        ChildCategory::where('cat_id', $id)->delete();
-        $category->delete();
-        return redirect()->back()->with('success_message', 'Category Deleted Successfully!');
     }
 
     /* --- Delete Child Category ---*/

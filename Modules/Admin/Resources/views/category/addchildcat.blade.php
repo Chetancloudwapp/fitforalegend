@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -94,24 +94,26 @@
                                         @enderror
                                         </div>
                                     </div>   --}}
-                                    <div class="form-group {{ $errors->has('subcategory_id') ? 'has-danger' : '' }}"> 
-                                        <label for="title">Sub Category*</label>
-                                        <select class="form-control" id="subcategory_id" name="subcategory_id">
-                                            <option value="">Select Sub Category</option>
-                                            @foreach ($get_sub_category as $value) 
-                                            <option value="{{ $value['id'] }}">{{ $value['name']}}</option>
+                                    <div class="col-md-6">
+                                        <div class="form-group {{ $errors->has('subcategory_id') ? 'has-danger' : '' }}"> 
+                                            <label for="title">Sub Category*</label>
+                                            <select class="form-control" id="subcategory_id" name="subcategory_id">
+                                                <option value="">Select Sub Category</option>
+                                                @foreach ($get_sub_category as $value) 
+                                                <option value="{{ $value['id'] }}">{{ $value['name']}}</option>
 
-                                            <option value="{{ $value['id'] }}"
-                                                {{ $value['id'] == $ChildCategory['subcategories_id'] ? 'selected' : '' }}>
-                                                {{ $value['name'] }}
-                                            </option>
-                                        @endforeach
-                                        </select> 
-                                        @error('subcategory_id')
-                                            <div class="col-form-alert-label">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                                <option value="{{ $value['id'] }}"
+                                                    {{ $value['id'] == $ChildCategory['subcategories_id'] ? 'selected' : '' }}>
+                                                    {{ $value['name'] }}
+                                                </option>
+                                            @endforeach
+                                            </select> 
+                                            @error('subcategory_id')
+                                                <div class="col-form-alert-label">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     {{-- <div class="form-group"> 
                                         <label for="title">Name*</label> 

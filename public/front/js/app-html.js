@@ -4195,20 +4195,20 @@ function onYouTubeIframeAPIReady() {
 			this.swatchToSelect();
 			this.swatchToggle('.prd-color.swatches');
 		},
-		swatchToSelect: function swatchToSelect() {
-			var swatch = '.js-size-list a';
-			$document.on('click', swatch, function (e) {
-				var $this = $(this),
-				    $select = $($this.closest('.swatches').find('select'));
-				if (!$this.parent('li').is('.active')) {
-					$this.closest('.js-size-list').find('li').removeClass('active');
-					$this.parent('li').addClass('active');
-					$select.val($this.data('value'));
-					$select.trigger('change');
-				}
-				e.preventDefault();
-			});
-		},
+		// swatchToSelect: function swatchToSelect() {
+		// 	var swatch = '.js-size-list a';
+		// 	$document.on('click', swatch, function (e) {
+		// 		var $this = $(this),
+		// 		    $select = $($this.closest('.swatches').find('select'));
+		// 		if (!$this.parent('li').is('.active')) {
+		// 			$this.closest('.js-size-list').find('li').removeClass('active');
+		// 			$this.parent('li').addClass('active');
+		// 			$select.val($this.data('value'));
+		// 			$select.trigger('change');
+		// 		}
+		// 		e.preventDefault();
+		// 	});
+		// },
 		swatchToggle: function swatchToggle(option) {
 			$(option).each(function () {
 				var $option = $(this),

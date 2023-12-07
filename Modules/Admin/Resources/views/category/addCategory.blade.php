@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -72,6 +72,9 @@
                                         <input type="file"
                                             class="form-control {{ $errors->has('image') ? 'form-control-danger' : '' }}"
                                             onchange="loadFile(event,'image_1')" name="image">
+                                            @if(!empty($category['image']))
+                                            <input type="hidden" name="current_image" value="{{ $category['image'] }}">
+                                            @endif
                                         @error('image')
                                             <div class="col-form-alert-label">
                                                 {{ $message }}
@@ -81,7 +84,7 @@
                                     <div class="media-left">
                                         <a href="#" class="profile-image">
                                             <img class="user-img img-css" id="image_1"
-                                                src="{{ $category['image'] != '' ? url('uploads/categories', $category['image']) : asset('assets/upload//placeholder.png') }}">
+                                                src="{{ $category['image'] != '' ? asset('uploads/categories/'. $category['image']) : asset('assets/upload//placeholder.png') }}">
                                         </a>
                                     </div>
                                     <div class="form-group mb-3 {{ $errors->has('status') ? 'has-danger' : '' }}">

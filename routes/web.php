@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\front\UserLoginController;
 use App\Http\Controllers\front\ProductsWebController;
+use App\Http\Controllers\front\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,16 @@ use App\Http\Controllers\front\ProductsWebController;
 //     return view('welcome');
 // });
 Route::get('clear', function() {
+   
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
 
-    Artisan::call('route:cache');
+    Artisan::call('route:clear');
     Artisan::call('view:clear');
     Artisan::call('optimize:clear');
     // Artisan::call('dump-autoload');
+
     return "Cleared!";
 });
 
@@ -38,23 +41,44 @@ Route::get('clear', function() {
 
     // Products listing and detail routes
     Route::match(['get','post'], 'product_listing', [ProductsWebController::class, 'productListing'])->name('productlisting');
-    Route::match(['get','post'], '/product_detail/{id}', [ProductsWebController::class, 'productDetail'])->name('productDetail');
+    Route::match(['get','post'], 'product_detail/{id}', [ProductsWebController::class, 'productDetail']);
 
-    // Add to Cart 
-    Route::match(['get','post'], '/add-to-cart', [ProductsWebController::class, 'addCart'])->name('addToCart');
+    // Get Product price Route
+    Route::post('get_product_price', [ProductsWebController::class, 'getProductPrice'])->name('get_product_price');
+
+    
+    // Routes for guests (not logged in)
+    Route::group(['middleware' => 'web'], function () {
+        // Route::get('/cart', [ProductsWebController::class, 'index'])->name('cart.index');
+        // Route::post('/cart/add', [ProductsWebController::class, 'addtocart'])->name('cart.add');
+
+        // Add to Cart 
+        Route::match(['get','post'], '/add-to-cart', [ProductsWebController::class, 'addCart'])->name('addToCart');
+    });
+
+    
+    // Routes for authenticated users
+    Route::group(['middleware' => ['web', 'auth']], function () {
+        Route::get('/cart/save', [ProductsWebController::class, 'savecart'])->name('cart.save');
+    });
+    
     
     // Middleware
     Route::group(['middleware' => ['checkuser']], function(){
         Route::get('/dashboard', [UserLoginController::class, 'dashboard'])->name('dashboard');
         Route::match(['get','post'], '/logout', [UserLoginController::class, 'logout'])->name('logout');
-
         Route::match(['get','post'], '/edit_profile', [UserLoginController::class, 'editProfile'])->name('editProfile');
-    });
-// });
 
-Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode = Artisan::call('config:cache');
-    echo '5';
-    die();
-});
+        // Shopping Cart
+        Route::get('view/cart', [ProductsWebController::class, 'viewCart'])->name('view_cart');
+
+        // Update Cart item Quantity via Ajax
+        Route::post('cart/update', [ProductsWebController::class, 'updateCartItemQty'])->name('updateCart');
+
+        // Delete Cart items via Ajax
+        Route::post('cart/delete', [ProductsWebController::class, 'deleteCartItem'])->name('deleteCart');
+
+        // Checkout Route
+        Route::get('cart/checkout', [CheckoutController::class, 'Checkout'])->name('checkout');
+
+    });

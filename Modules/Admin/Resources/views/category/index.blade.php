@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin::admin.layout.layout')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>{{ ++$key }}</td>
                                             <td><img class="tbl-img-css rounded-circle" width="50px"
-                                                src="{{ url('uploads/categories', $category['image']) }}">
+                                                src="{{ asset('uploads/categories/'. $category['image']) }}">
                                             </td>
                                             <td>{{ $category['name'] }}</td>
                                             <td>
@@ -64,7 +64,7 @@
                                                 {{-- <a href="javascript:;"> <i class="fa-solid fa-eye"></i> </a> --}}
                                                 <a href="{{ url('admin/addcategory/'.$category['id']) }}"> <i class="fa-solid fa-pencil"></i></a>
                                                 {{-- <a href="{{ url('admin/delete_categories/'.$category['id'])}}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a> --}}
-                                                <a href="javascript:void(0)" record="categories" record_id="{{ $category['id'] }}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a>
+                                                <a href="javascript:void(0)" record="category/delete" record_id="{{ $category['id'] }}" class="confirmDelete" name="Category" title="Delete Category Page"> <i class="fa-solid fa-trash" ></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -98,7 +98,9 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location.href = "/admin/delete_"+record+"/"+record_id;
+
+                root = "{{ config('app.url') }}"
+                window.location.href = root + "admin/"+record+"/"+record_id;
             }
             });
 
