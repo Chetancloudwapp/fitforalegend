@@ -30,17 +30,17 @@ $categories = Categories::categories();
                         </div>
                         <div class="hdr_container_desktop">
                             <div class="dropdn dropdn_account dropdn_fullheight"> 
-                                <a href="{{ route('dashboard') }}" class="dropdn-link js-dropdn-link ac-link"  ><i class="icon-user"></i>
-                                <span class="dropdn-link-txt ">Account</span></a> 
+                                <a href="{{ route('dashboard') }}" class="dropdn-link js-dropdn-link ac-link"><i class="icon-user"></i>
+                                <span class="dropdn-link-txt">Account</span></a> 
                             </div>
                         </div>
                         <div class="dropdn dropdn_account dropdn_fullheight"> 
-                            <a href="#" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-heart"></i>
-                            <span class="dropdn-link-txt ">Wishlist</span></a> 
+                            <a href="#" class="dropdn-link js-dropdn-link ac-link"><i class="icon-heart"></i>
+                            <span class="dropdn-link-txt">Wishlist</span></a> 
                         </div>
                         <div class="dropdn dropdn_account dropdn_fullheight"> 
-                            <a href="{{ route('view_cart')}}" class="dropdn-link js-dropdn-link ac-link" ><i class="icon-basket"></i>
-                            <span class="dropdn-link-txt ">Cart</span></a> 
+                            <a href="{{ route('view_cart')}}" class="dropdn-link js-dropdn-link ac-link"><i class="icon-basket"></i>
+                            <span class="dropdn-link-txt">Cart</span></a> 
                         </div>
                     </div>
                 </div>

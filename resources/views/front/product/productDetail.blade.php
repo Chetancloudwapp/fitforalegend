@@ -66,13 +66,13 @@
 						<div class="prd-block_main-image">
 							<div class="prd-block_main-image-holder" id="prdMainImage">
 								<div class="product-main-carousel js-product-main-carousel" data-zoom-position="inner">
-									{{-- <div data-value="Beige"><span class="prd-img">
+									<div data-value="Beige"><span class="prd-img">
 										<img src="{{ $product['featured_image'] != '' ? asset('uploads/products/featuredImages/large/'. $product['featured_image']) : asset('assets/upload/placeholder.png') }}"
 										data-src="{{ $product['featured_image'] != '' ? asset('uploads/products/featuredImages/large/'. $product['featured_image']) : asset('assets/upload/placeholder.png') }}" class="lazyload fade-up elzoom"
 										alt=""
 										data-zoom-image="{{ asset('uploads/products/featuredImages/medium/'. $product['featured_image'])}}" />
 										</span>
-									</div> --}}
+									</div>
 									@foreach($product['images'] as $value)
 									<div data-value="Beige"><span class="prd-img"><img
 												src="{{ $value['image'] != '' ? asset('uploads/products/galleryImages/large/'. $value['image']) : asset('assets/upload/placeholder.png') }}"

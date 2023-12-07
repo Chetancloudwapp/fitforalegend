@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\front\UserLoginController;
-use App\Http\Controllers\front\ProductsWebController;
+use App\Http\Controllers\front\ProductsController;
 use App\Http\Controllers\front\CheckoutController;
 
 /*
@@ -40,26 +40,26 @@ Route::get('clear', function() {
     Route::match(['get','post'], '/user_login', [UserLoginController::class, 'user_login'])->name('login');
 
     // Products listing and detail routes
-    Route::match(['get','post'], 'product_listing', [ProductsWebController::class, 'productListing'])->name('productlisting');
-    Route::match(['get','post'], 'product_detail/{id}', [ProductsWebController::class, 'productDetail']);
+    Route::match(['get','post'], 'product_listing', [ProductsController::class, 'productListing'])->name('productlisting');
+    Route::match(['get','post'], 'product_detail/{id}', [ProductsController::class, 'productDetail']);
 
     // Get Product price Route
-    Route::post('get_product_price', [ProductsWebController::class, 'getProductPrice'])->name('get_product_price');
+    Route::post('get_product_price', [ProductsController::class, 'getProductPrice'])->name('get_product_price');
 
     
     // Routes for guests (not logged in)
     Route::group(['middleware' => 'web'], function () {
-        // Route::get('/cart', [ProductsWebController::class, 'index'])->name('cart.index');
-        // Route::post('/cart/add', [ProductsWebController::class, 'addtocart'])->name('cart.add');
+        // Route::get('/cart', [ProductsController::class, 'index'])->name('cart.index');
+        // Route::post('/cart/add', [ProductsController::class, 'addtocart'])->name('cart.add');
 
         // Add to Cart 
-        Route::match(['get','post'], '/add-to-cart', [ProductsWebController::class, 'addCart'])->name('addToCart');
+        Route::match(['get','post'], '/add-to-cart', [ProductsController::class, 'addCart'])->name('addToCart');
     });
 
     
     // Routes for authenticated users
     Route::group(['middleware' => ['web', 'auth']], function () {
-        Route::get('/cart/save', [ProductsWebController::class, 'savecart'])->name('cart.save');
+        Route::get('/cart/save', [ProductsController::class, 'savecart'])->name('cart.save');
     });
     
     
@@ -70,13 +70,13 @@ Route::get('clear', function() {
         Route::match(['get','post'], '/edit_profile', [UserLoginController::class, 'editProfile'])->name('editProfile');
 
         // Shopping Cart
-        Route::get('view/cart', [ProductsWebController::class, 'viewCart'])->name('view_cart');
+        Route::get('view/cart', [ProductsController::class, 'viewCart'])->name('view_cart');
 
         // Update Cart item Quantity via Ajax
-        Route::post('cart/update', [ProductsWebController::class, 'updateCartItemQty'])->name('updateCart');
+        Route::post('cart/update', [ProductsController::class, 'updateCartItemQty'])->name('updateCart');
 
         // Delete Cart items via Ajax
-        Route::post('cart/delete', [ProductsWebController::class, 'deleteCartItem'])->name('deleteCart');
+        Route::post('cart/delete', [ProductsController::class, 'deleteCartItem'])->name('deleteCart');
 
         // Checkout Route
         Route::get('cart/checkout', [CheckoutController::class, 'Checkout'])->name('checkout');

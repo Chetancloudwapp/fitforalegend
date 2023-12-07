@@ -15,7 +15,7 @@ use App\Models\Cart;
 use DB;
 use Auth;
 
-class ProductsWebController extends Controller
+class ProductsController extends Controller
 {
     // $id is category id here 
     public function productListing(Request $request)
@@ -53,7 +53,7 @@ class ProductsWebController extends Controller
         }
 
 
-        return view('front.productListing')->with(compact('get_products'));
+        return view('front.product.productListing')->with(compact('get_products'));
     }   
     
     
@@ -111,7 +111,7 @@ class ProductsWebController extends Controller
             $relatedProducts = Product::with('brands','colors','sizes','images')->where('category', $product['category'])->where('id', '!=', $id)->limit(4)->inRandomOrder()->get();                
         }
 
-        return view('front.productDetail',compact('product','get_var_products','arr','arr2','relatedProducts'));
+        return view('front.product.productDetail',compact('product','get_var_products','arr','arr2','relatedProducts'));
     }
 
     /* --- Get Product Price via Ajax--- */

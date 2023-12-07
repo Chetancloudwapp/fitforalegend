@@ -5,11 +5,11 @@ use Modules\Admin\Entities\{Product,Categories};
 $get_men_categories = Categories::where('status', 'Active')->where('id','=', 1)->with(['products'=>function($query){
     $query->orderBy('id','desc')->limit(4);
 }])->get()->toArray();
-// echo "<pre>"; print_r($get_men_categories); die;
 
 $get_women_categories = Categories::where('status', 'Active')->where('id','=', 2)->with(['products'=>function($query){
     $query->orderBy('id','desc')->limit(4);
 }])->get()->toArray();
+// echo "<pre>"; print_r($get_women_categories); die;
 
 $get_child_categories = Categories::where('status', 'Active')->where('id','=', 3)->with(['products'=>function($query){
     $query->orderBy('id','desc')->limit(4);

@@ -15,7 +15,7 @@ class VendorController extends Controller
     use ValidatesRequests;
     public function vendorDashboard()
     {
-        return view('vendor.dashboard');
+        return view('vendor::dashboard');
     }
 
     public function Vendorlogin(Request $request)
@@ -43,7 +43,7 @@ class VendorController extends Controller
                 return redirect()->back()->with("error_message", "Invalid Email or Password");
             }
         }
-        return view('vendor.login');
+        return view('vendor::login');
     }
 
     public function vendorLogout(){
